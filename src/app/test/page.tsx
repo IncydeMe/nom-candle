@@ -1,30 +1,28 @@
-"use client"
+"use client";
 
-import React from 'react'
-import AccordionUi from '@/components/ui/accordion/accordion/accordion';
-import AccordionHeaderUi from '@/components/ui/accordion/accordionHeader/accordionHeader';
-import AccordionBodyUi from '@/components/ui/accordion/accordionBody/accordionBody';
+import React from "react";
+
+import { CheckboxUi } from "@/components/ui/checkbox/checkbox";
+import { ChipUi } from "@/components/ui/chip/chip";
+import { CollapseUi } from "@/components/ui/collapse/collapse";
+import { ButtonUi } from "@/components/ui/button/button";
+import { CardUi } from "@/components/ui/card/card/card";
+import { CardBodyUi } from "@/components/ui/card/cardBody/cardBody";
+import { DialogUi } from "@/components/ui/dialog/dialog";
+import { DrawerUi } from "@/components/ui/drawer/drawer";
+import { IconButtonUi } from "@/components/ui/iconButton/iconButton";
+import { InputUi } from "@/components/ui/input/input";
 
 const page: React.FC = () => {
-    const [open, setOpen] = React.useState(1);
- 
-    const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
-    return(
-        <>
-            <AccordionUi open={open == 1}>
-                <AccordionHeaderUi onClick={() => handleOpen(1)}>
-                    <div>What is Material Tailwind?</div>
-                </AccordionHeaderUi>
-                <AccordionBodyUi>
-                    <div>
-                        We&apos;re not always in the position that we want to be at. We&apos;re constantly
-          growing. We&apos;re constantly making mistakes. We&apos;re constantly trying to express
-          ourselves and actualize our dreams.
-                    </div>
-                </AccordionBodyUi>
-            </AccordionUi>
-        </>
-    )
-}
+  const [open, setOpen] = React.useState(false);
+
+  const openDrawer = () => setOpen(true);
+  const closeDrawer = () => setOpen(false);
+  return (
+    <div className="mt-[50px]">
+      <InputUi label="Test" />
+    </div>
+  );
+};
 
 export default page;
