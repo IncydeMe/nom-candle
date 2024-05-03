@@ -1,14 +1,14 @@
 "use client"
 import React from "react";
 import { ListItem } from "@material-tailwind/react";
-import type { IListItemProps as ListItemProps } from "./IListItem";
+import type { IListItemProps } from "./IListItem";
 
-export const ListItemUi: React.FC<ListItemProps> = ({ children, ...props }) => {
+export const ListItemUi: React.FC<IListItemProps> = ({ children, onPointerEnterCapture, onPointerLeaveCapture, ...props }) => {
     return (
         <ListItem
             placeholder={""}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
+            onPointerEnterCapture={onPointerEnterCapture}
+            onPointerLeaveCapture={onPointerLeaveCapture}
             {...props}
         >
             {children}
