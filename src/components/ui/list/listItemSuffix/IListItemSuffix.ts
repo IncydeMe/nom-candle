@@ -1,8 +1,8 @@
 import React from "react";
-import { CarouselProps } from "@material-tailwind/react";
+import { ListItemSuffixProps } from "@material-tailwind/react";
 
-export interface ICarouselProps extends CarouselProps {
-    children: React.ReactNode;
+export interface IListItemSuffixProps extends ListItemSuffixProps {
+    children: React.ReactNode | any;
     className?: string;
     onPointerEnterCapture?: React.PointerEventHandler<HTMLDivElement>;
     onPointerLeaveCapture?: React.PointerEventHandler<HTMLDivElement>;
