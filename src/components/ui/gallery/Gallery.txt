@@ -1,7 +1,0 @@
-Note: Gallery không phải là 1 component official của Material Tailwind
-
-Tuy nhiên component này sẽ được xài nhiều trong quá trình dev, nên tui tạo sẵn luôn
-
-Ref: https://www.material-tailwind.com/docs/react/gallery
-
-Tận dụng grid cũng như layout sẽ là critical của Gallery này
