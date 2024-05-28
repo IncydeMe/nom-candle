@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import UserHeader from "@/components/shared/user-header";
+import UserFooter from "@/components/shared/user-footer";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -17,7 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <main>{children}</main>
+        <section className="bg-[#EBCBA5] w-screen h-screen overflow-x-hidden">
+          <UserHeader />
+          <main className="min-h-screen overflow-x-hidden px-20 pt-5">{children}</main>
+          <UserFooter />
+        </section>
       </body>
     </html>
   );
