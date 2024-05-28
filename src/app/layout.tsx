@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <section className="bg-[#EBCBA5] w-screen h-screen overflow-x-hidden">
+        <section className="bg-[#FFEDD7] w-screen h-screen overflow-x-hidden">
           <UserHeader />
           <main className="min-h-screen overflow-x-hidden px-20 pt-5">{children}</main>
           <UserFooter />
