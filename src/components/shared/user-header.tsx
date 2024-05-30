@@ -16,12 +16,12 @@ const UserHeader = () => {
                 </section>
                 {/* General Navigation */}
                 <nav>
-                    <ul className='flex justify-around gap-x-6 text-[#C6613D] '>
+                    <ul className='flex justify-around gap-x-10 text-[#C6613D] '>
                         <li>
                             <Link href='../about' className='transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline'>Về chúng tôi</Link>
                         </li>
                         <li>
-                            <Link href='../user/browse' className='transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline'>Sản phẩm</Link>
+                            <Link href='../products' className='transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline'>Sản phẩm</Link>
                         </li>
                         <li>
                             <Link href='../blog' className='transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline'>Blog</Link>
