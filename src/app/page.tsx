@@ -7,11 +7,12 @@ import Category_2 from '../../public/images/CategoryImage2.png';
 import Category_3 from '../../public/images/CategoryImage3.png';
 import Category_4 from '../../public/images/CategoryImage4.png';
 
-import Blog_1 from '../../public/images/BlogImage1.png';
-import Blog_2 from '../../public/images/BlogImage2.png';
-import Blog_3 from '../../public/images/BlogImage3.png';
+import Blog_1 from '../../public/images/Blog_Image_1.png';
+import Blog_2 from '../../public/images/Blog_Image_2.png';
+import Blog_3 from '../../public/images/Blog_Image_3.png';
 
 import Logo from '../../public/images/sample_logo.png';
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -57,19 +58,55 @@ export default function Home() {
       </section>
       <section className="flex justify-center gap-x-8 my-10">
         <div className="relative">
-          <Image src={Blog_1} alt="Blog_1" className="w-[360px] h-[420px] object-cover rounded-[4px]"/>
-          <p className="uppercase font-semibold text-[#C6613D] absolute bottom-1 left-[19%]">Nến thơm và sức khỏe</p>
-          <Image src={Logo} alt="Logo" className="w-[60px] h-[60px] object-cover rounded-[8px] absolute top-0.5 left-0.5"/>
+          <div>
+            <Image src={Blog_1} alt="Blog_1" className="w-[360px] h-[420px] object-cover rounded-[4px]"/>
+            <Image src={Logo} alt="Logo" className="w-[60px] h-[60px] object-cover rounded-[8px] absolute top-0.5 left-0.5"/>
+          </div>
+          <span className="w-[360px] pt-2 text-[12px] flex justify-between items-end">
+            <p className="text-[12px] w-2/3 uppercase font-semibold text-[#C6613D]">
+              Nến thơm là gì, cách nhận biết nến thơm an toàn.
+            </p>
+            <Link href={'#'} className="pt-4">
+              <span className="flex items-center gap-x-2">
+                <em className="text-[#C6613D] transition-all ease-in-out duration-500 hover:font-semibold hover:underline">Đọc thêm</em>
+                <i className="border-[#C6613D] border-r-[1px] border-b-[1px] inline-block p-1 -rotate-45"></i>
+              </span>
+            </Link>
+          </span>
         </div>
         <div className="relative">
-          <Image src={Blog_2} alt="Blog_1" className="w-[360px] h-[420px] object-cover rounded-[4px]"/>
-          <p className="uppercase font-semibold text-[#C6613D] absolute bottom-1 left-[22%]">Nến thơm và sức khỏe</p>
-          <Image src={Logo} alt="Logo" className="w-[60px] h-[60px] object-cover rounded-[8px] absolute top-0.5 left-0.5"/>
+          <div>
+            <Image src={Blog_2} alt="Blog_1" className="w-[360px] h-[420px] object-cover rounded-[4px]"/>
+            <Image src={Logo} alt="Logo" className="w-[60px] h-[60px] object-cover rounded-[8px] absolute top-0.5 left-0.5"/>
+          </div>
+          <span className="w-[360px] pt-2 text-[12px] flex justify-between items-end">
+            <p className="text-[12px] w-2/3 uppercase font-semibold text-[#C6613D]">
+              Nến thơm là gì, cách nhận biết nến thơm an toàn.
+            </p>
+            <Link href={'#'} className="pt-4">
+              <span className="flex items-center gap-x-2">
+                <em className="text-[#C6613D] transition-all ease-in-out duration-500 hover:font-semibold hover:underline">Đọc thêm</em>
+                <i className="border-[#C6613D] border-r-[1px] border-b-[1px] inline-block p-1 -rotate-45"></i>
+              </span>
+            </Link>
+          </span>
         </div>
         <div className="relative">
-          <Image src={Blog_3} alt="Blog_1" className="w-[360px] h-[420px] object-cover rounded-[4px]"/>
-          <p className="uppercase font-semibold text-[#C6613D] absolute bottom-1 left-[22%]">Nến thơm và sức khỏe</p>
-          <Image src={Logo} alt="Logo" className="w-[60px] h-[60px] object-cover rounded-[8px] absolute top-0.5 left-0.5"/>
+          <div>
+            <Image src={Blog_3} alt="Blog_1" className="w-[360px] h-[420px] object-cover rounded-[4px]"/>
+            <Image src={Logo} alt="Logo" className="w-[60px] h-[60px] object-cover rounded-[8px] absolute top-0.5 left-0.5"/>
+          </div>
+          <span className="w-[360px] pt-2 text-[12px] flex justify-between items-end">
+            <p className="text-[12px] w-2/3 uppercase font-semibold text-[#C6613D]">
+              Nến thơm là gì, cách nhận biết nến thơm an toàn.
+            </p>
+            <Link href={'#'} className="pt-4">
+              <span className="flex items-center gap-x-2">
+                <em className="text-[#C6613D] transition-all ease-in-out duration-500 hover:font-semibold hover:underline">Đọc thêm</em>
+                <i className="border-[#C6613D] border-r-[1px] border-b-[1px] inline-block p-1 -rotate-45"></i>
+              </span>
+            </Link>
+          </span>
         </div>
       </section>
     </main>
