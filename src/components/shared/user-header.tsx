@@ -4,6 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 
+import { CircleUserRound } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
+
 import Logo from '../../../public/images/sample_logo.png';
 
 const UserHeader = () => {
@@ -35,11 +38,13 @@ const UserHeader = () => {
                 <nav>
                     <ul className="flex justify-around gap-x-6 text-[#C6613D]">
                         <li>
-                            <Link href='../user/cart' className='transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline'>Giỏ hàng</Link>
+                            <Link href='../user/cart' className='transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline'>
+                                <ShoppingCart size={24} />
+                            </Link>
                         </li>
                         <li>
                             <Link href='../user/profile' className='transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline'>
-                                Tài khoản
+                                <CircleUserRound size={24} />
                             </Link>
                         </li>
                     </ul>
