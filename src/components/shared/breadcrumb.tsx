@@ -11,7 +11,7 @@ import {
 
 import { usePathname } from "next/navigation";
 
-import { Slash } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
 const UserBreadcrumb = () => {
     const pathname = usePathname().split("/");
@@ -23,17 +23,28 @@ const UserBreadcrumb = () => {
                     <BreadcrumbLink href="/">Trang chủ</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
-                    <Slash />
+                    <ChevronRight />
                 </BreadcrumbSeparator>
                 {pathname.map((path, index) => {
-                    if (path === "") return null;
-                    return (
-                        <BreadcrumbItem key={index}>
-                            <BreadcrumbLink href={`/${path}`}>
-                                {path.charAt(0).toUpperCase() + path.slice(1)}
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                    );
+                    while (path !== "") {
+                        return (
+                            <>
+                                <BreadcrumbItem key={index}>
+                                    <BreadcrumbLink href={`/${path}`}>
+                                        {path.charAt(0).toUpperCase() + path.slice(1)}
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                {
+                                    index < pathname.length - 1 && (
+                                        <BreadcrumbSeparator>
+                                            <ChevronRight />
+                                        </BreadcrumbSeparator>
+                                    )
+                                }
+                            </>
+                        )
+                    }
+                    return null;
                 })}
             </BreadcrumbList>
         </Breadcrumb>
