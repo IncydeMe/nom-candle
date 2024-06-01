@@ -61,7 +61,7 @@ const ProductPage = () => {
               </ul>
             </div>
             <div className='my-2'>
-              <h3 className='text-lg font-semibold my-2 underline underline-offset-2'>Giá tiền</h3>
+              <h3 className='text-lg font-semibold my-2 underline underline-offset-2 uppercase'>Giá tiền</h3>
               <Slider 
                 value={value} 
                 max={9000000} 

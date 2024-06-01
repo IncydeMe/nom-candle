@@ -82,7 +82,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ type, title, image }) 
             <div>
                 <Heart className='absolute top-0 right-0 w-6 h-6 m-2 hover:bg-white hover:rounded-[40px] cursor-pointer' />
             </div>
-            <p className='text-[12px] py-2'>{title}</p>
+            <p className='text-[12px] py-2 text-center'>{title}</p>
         </section>
     );
 
