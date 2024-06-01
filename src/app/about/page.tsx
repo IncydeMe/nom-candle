@@ -21,7 +21,7 @@ import UserBreadcrumb from '@/components/shared/breadcrumb';
 function About() {
     return (
         <main>
-            <section className='grid grid-cols-3 gap-x-10'>
+            <section className='grid grid-cols-3 justify-items-center gap-x-10'>
                 <div>
                     <Image src={About_HeadImage_4} alt="About Head Image 4" className="w-[560px] h-full object-cover rounded-[10px]" />
                 </div>

@@ -1,96 +1,95 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-import product_hero_images from "../../../public/images/productImages/product_hero_image.png";
-import product_preview_1 from "../../../public/images/productImages/product_preview_1.png";
-import product_preview_2 from "../../../public/images/productImages/product_preview_2.png";
-import product_preview_3 from "../../../public/images/productImages/product_preview_3.png";
-import product_preview_4 from "../../../public/images/productImages/product_preview_4.png";
-import product_carousel_1 from "../../../public/images/productImages/product_carousel_1.png";
-import product_carousel_2 from "../../../public/images/productImages/product_carousel_2.png";
-import product_carousel_3 from "../../../public/images/productImages/product_carousel_3.png";
+import ProductBackground from "../../../public/images/ProductBackground.png";
 import UserBreadcrumb from "@/components/shared/breadcrumb";
-import { PRODUCT_DATA } from "@/constants/product.data";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import SearchInput from "@/components/search";
+import { ProductCard } from "@/components/shared/custom-card";
+
+import Category_NenThom from "../../../public/images/Category_NenThom.png";
+import Category_SapThom from "../../../public/images/Category_SapThom.png";
+import Category_RoomSprays from "../../../public/images/Category_RoomSprays.png";
+import Category_KhuechTanTinhDau from "../../../public/images/Category_KhuechTanTinhDau.png";
+import Link from "next/link";
 
 const ProductPage = () => {
   const [value, setValue] = useState([0, 9000000]);
 
   return (
-    <main className="text-[#C6613D]">
-      <Image
-        src={product_hero_images}
-        alt="candleHeroImage"
-        className="w-full"
-      />
-      <div className="mt-[25px]">
-        <UserBreadcrumb />
-      </div>
-      <div className="flex gap-[60px] mt-[40px] justify-center">
-        {PRODUCT_DATA.map(({ id, name }) => (
-          <div
-            className="cursor-pointer text-[20px] font-medium border-b-2 border-[#C6613D] leading-6"
-            key={id}
-          >
-            {name}
-          </div>
-        ))}
-      </div>
-      <div className="flex justify-center gap-4 mt-[18px]">
-        <Image
-          className="max-w-[200px] max-h-[400px]"
-          src={product_preview_1}
-          alt="product_preview_1"
-        />
-        <Image
-          className="max-w-[200px] max-h-[400px]"
-          src={product_preview_2}
-          alt="product_preview_2"
-        />
-        <Image
-          className="max-w-[200px] max-h-[400px]"
-          src={product_preview_3}
-          alt="product_preview_3"
-        />
-        <Image
-          className="max-w-[200px] max-h-[400px]"
-          src={product_preview_4}
-          alt="product_preview_4"
-        />
-      </div>
+    <main className="flex flex-col justify-center gap-4 text-[#C6613D]">
+      <UserBreadcrumb />
+      <SearchInput />
 
-      <div className="w-full h-[1px] bg-[#C6613D] mt-[60px] mb-5"></div>
-      <div className="flex flex-col items-center">
-        <div>Sản phẩm bán chạy</div>
-        <div className="font-medium">Được yêu thích trong tháng</div>
-      </div>
-      <Carousel className="flex justify-center mb-10">
-        <CarouselContent className="mt-[20px]">
-          <CarouselItem className="max-w-[280px] max-h-[400px]">
-            <Image src={product_carousel_1} alt="product_preview_1" />
-          </CarouselItem>
-          <CarouselItem className="max-w-[280px] max-h-[400px]">
-            <Image src={product_carousel_2} alt="product_preview_1" />
-          </CarouselItem>
-          <CarouselItem className="max-w-[280px] max-h-[400px]">
-            <Image src={product_carousel_3} alt="product_preview_1" />
-          </CarouselItem>
-          <CarouselItem className="max-w-[280px] max-h-[400px]">
-            <Image src={product_carousel_3} alt="product_preview_1" />
-          </CarouselItem>
-          <CarouselItem className="max-w-[280px] max-h-[400px]">
-            <Image src={product_carousel_3} alt="product_preview_1" />
-          </CarouselItem>
-        </CarouselContent>
-        <CarouselNext />
-        <CarouselPrevious />
-      </Carousel>
+      <Image
+        src={ProductBackground}
+        alt="Product Background"
+        className="w-full h-[420px] object-cover rounded-[8px]"
+      />
+
+      <section className="text-center">
+        <h4 className="uppercase font-extrabold text-[36px]">
+          Chào mừng đến với cửa hàng Nơm
+        </h4>
+        <p className="font-semibold text-[16px] my-2">
+          -- Mời mọi người ghé qua các danh mục của cửa hàng chúng mình! --
+        </p>
+      </section>
+      <section>
+        <div className="grid grid-cols-4 gap-4">
+          <Link href={"/products/nen-thom"} className="flex flex-col gap-2">
+            <Image
+              src={Category_NenThom}
+              alt="Category Nến Thơm"
+              className="object-cover rounded-[8px]"
+            />
+            <h4 className="text-center font-semibold my-2">Nến Thơm</h4>
+          </Link>
+          <Link href={"/products/sap-thom"} className="flex flex-col gap-2">
+            <Image
+              src={Category_SapThom}
+              alt="Category Sáp Thơm"
+              className="object-cover rounded-[8px]"
+            />
+            <h4 className="text-center font-semibold my-2">Sáp Thơm</h4>
+          </Link>
+          <Link href={"/products/room-sprays"} className="flex flex-col gap-2">
+            <Image
+              src={Category_RoomSprays}
+              alt="Category Room Sprays"
+              className="object-cover rounded-[8px]"
+            />
+            <h4 className="text-center font-semibold my-2">Room Sprays</h4>
+          </Link>
+          <Link
+            href={"/products/khuech-tan-tinh-dau"}
+            className="flex flex-col gap-2"
+          >
+            <Image
+              src={Category_KhuechTanTinhDau}
+              alt="Category Khuếch Tán Tinh Dầu"
+              className="object-cover rounded-[8px]"
+            />
+            <h4 className="text-center font-semibold my-2">
+              Khuếch Tán Tinh Dầu
+            </h4>
+          </Link>
+        </div>
+      </section>
+      <section className="text-center">
+        <h4 className="uppercase font-extrabold text-[36px]">
+          Không biết bắt đầu từ đâu à?
+        </h4>
+        <p className="font-semibold text-[16px] my-2">
+          -- Ghé qua đây và thưởng thức các mùi hương bán chạy của chúng mình nè
+          --
+        </p>
+      </section>
+      <section className="grid grid-cols-4 justify-items-center">
+        <ProductCard image={Category_NenThom} title="Sample Product" />
+        <ProductCard image={Category_NenThom} title="Sample Product" />
+        <ProductCard image={Category_NenThom} title="Sample Product" />
+        <ProductCard image={Category_NenThom} title="Sample Product" />
+      </section>
     </main>
   );
 };
