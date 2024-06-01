@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import ProductBackground from '../../../../public/images/ProductBackground.png';
 import UserBreadcrumb from '@/components/shared/breadcrumb';
@@ -13,6 +13,35 @@ import { Slider } from '@/components/ui/slider';
 
 const ProductPage = () => {
   const [value, setValue] = useState([0, 9000000]);
+
+  // const [selectedCategories, setSelectedCategories] = useState<string[]>([]);;
+  // const [candles, setCandles] = useState([]);
+
+  // const fetchCandles = async () => {
+  //   let response;
+  //   if (selectedCategories.length === 0) {
+  //     response = await axios.get('/api/candles');
+  //   } else {
+  //     response = await axios.get('/api/candlesByCategory', {
+  //       params: {
+  //         category: selectedCategories.join(','),
+  //       },
+  //     });
+  //   }
+  //   setCandles(response.data);
+  // };
+  
+  // useEffect(() => {
+  //   fetchCandles();
+  // }, [selectedCategories]);
+  
+  // const handleCheckboxChange = (category: string) => {
+  //   if (selectedCategories.includes(category)) {
+  //     setSelectedCategories(selectedCategories.filter((c) => c !== category));
+  //   } else {
+  //     setSelectedCategories([...selectedCategories, category]);
+  //   }
+  // };
 
   return (
     <main className='flex flex-col justify-center gap-4 text-[#C6613D]'>
@@ -36,25 +65,37 @@ const ProductPage = () => {
               <ul className='grid grid-cols-2 gap-2'>
                 <li>
                   <div className='flex justify-start items-center gap-4'>
-                    <Checkbox className='w-[12px] h-[12px]'/>
+                    <Checkbox 
+                      className='w-[12px] h-[12px]'
+                      // onChange={() => handleCheckboxChange('Nến Thơm')}
+                      />
                     <p>Nến thơm</p>
                   </div>
                 </li>
                 <li>
                   <div className='flex justify-start items-center gap-4'>
-                    <Checkbox className='w-[12px] h-[12px]'/>
+                    <Checkbox 
+                      className='w-[12px] h-[12px]'
+                      // onChange={() => handleCheckboxChange('Sáp Thơm')}
+                    />
                     <p>Sáp thơm</p>
                   </div>
                 </li>
                 <li>
                   <div className='flex justify-start items-center gap-4'>
-                    <Checkbox className='w-[12px] h-[12px]'/>
+                    <Checkbox 
+                      className='w-[12px] h-[12px]'
+                      // onChange={() => handleCheckboxChange('Room Sprays')}
+                      />
                     <p>Room Sprays</p>
                   </div>
                 </li>
                 <li>
                   <div className='flex justify-start items-center gap-4'>
-                    <Checkbox className='w-[12px] h-[12px]'/>
+                    <Checkbox 
+                      className='w-[12px] h-[12px]'
+                      // onChange={() => handleCheckboxChange('Khuếch Tán Tinh Dầu')}  
+                      />
                     <p>Khuếch tán tinh dầu</p>
                   </div>
                 </li>
@@ -120,66 +161,14 @@ const ProductPage = () => {
         </section>
         
         <section className='col-span-2 grid grid-cols-4 gap-4 w-fit'>
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
-          <ProductCard 
-            title='Louis Vuitton'
-            image={ProductBackground}
-            type='other-products'
-          />
+          <ProductCard image={ProductBackground} title='Sample Product'/>
+          <ProductCard image={ProductBackground} title='Sample Product'/>
+          <ProductCard image={ProductBackground} title='Sample Product'/>
+          <ProductCard image={ProductBackground} title='Sample Product'/>
+          <ProductCard image={ProductBackground} title='Sample Product'/>
+          <ProductCard image={ProductBackground} title='Sample Product'/>
+          <ProductCard image={ProductBackground} title='Sample Product'/>
+          <ProductCard image={ProductBackground} title='Sample Product'/>
         </section>
       </section>
     </main>

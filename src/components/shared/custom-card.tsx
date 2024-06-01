@@ -79,9 +79,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ type, title, image }) 
     return (
         <section className='relative'>
             <Image src={image} alt={title} className={`${type?.match('best-seller')? 'w-[240px] h-[420px]': 'w-[240px] h-[240px]'} object-cover rounded-[12px]`}/>
-            <div>
-                <Heart className='absolute top-0 right-0 w-6 h-6 m-2 hover:bg-white hover:rounded-[40px] cursor-pointer' />
-            </div>
+            {
+                type?.match('best-seller') && (
+                    <div className='absolute top-0 left-0 bg-[#C6613D] text-white px-2 py-1 rounded-[0px]'>
+                        <p className='text-[12px]'>Bán chạy</p>
+                    </div>
+                )
+            }
+            {
+                type?.match('other-products') && (
+                    <div>
+                        <Heart className='absolute top-0 right-0 w-6 h-6 m-2 hover:bg-white hover:rounded-[40px] cursor-pointer' />
+                    </div>
+                )
+            }
             <p className='text-[12px] py-2 text-center'>{title}</p>
         </section>
     );
