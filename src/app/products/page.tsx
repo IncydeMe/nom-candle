@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 import product_hero_images from "../../../public/images/productImages/product_hero_image.png";
 import product_preview_1 from "../../../public/images/productImages/product_preview_1.png";
@@ -20,6 +20,8 @@ import {
 } from "@/components/ui/carousel";
 
 const ProductPage = () => {
+  const [value, setValue] = useState([0, 9000000]);
+
   return (
     <main className="text-[#C6613D]">
       <Image

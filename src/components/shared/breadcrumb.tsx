@@ -20,7 +20,9 @@ const UserBreadcrumb = () => {
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Trang chủ</BreadcrumbLink>
+                    <BreadcrumbLink href="/" className="hover:underline hover:font-semibold">
+                        Trang chủ
+                    </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                     <ChevronRight />
@@ -30,7 +32,7 @@ const UserBreadcrumb = () => {
                         return (
                             <>
                                 <BreadcrumbItem key={index}>
-                                    <BreadcrumbLink href={`/${path}`}>
+                                    <BreadcrumbLink href={`/${path}`} className="hover:underline hover:font-semibold">
                                         {path.charAt(0).toUpperCase() + path.slice(1)}
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
