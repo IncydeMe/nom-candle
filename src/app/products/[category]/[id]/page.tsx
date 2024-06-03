@@ -7,7 +7,7 @@ import ProductImage from '../../../../../public/images/Product_Image.png';
 import { ProductCard } from '@/components/shared/custom-card';
 
 export default function Page({ params }: { params: { id: number, category: string } }) {
-    const money = 1000000;
+    
   
     return (
       <div className='flex flex-col'>
@@ -37,10 +37,7 @@ export default function Page({ params }: { params: { id: number, category: strin
                 Mùi hương: Lê Nghĩa. <br />
               </em>
               <p className='text-[16px] font-semibold text-[#C6613D]'>
-                {money.toLocaleString('vi-VN', {
-                  style: 'currency',
-                  currency: 'VND'
-                  })}
+                Giá: 200.000 VNĐ
               </p>
               <div className='flex justify-between'>
                 <button className='w-[200px] h-[40px] bg-[#C6613D] hover:bg-[#8d442a] text-white transition-colors ease-in-out duration-500 rounded-[8px]'>Buy Now</button>
