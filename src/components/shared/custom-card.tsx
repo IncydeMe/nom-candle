@@ -84,24 +84,32 @@ interface ProductCardProps {
   type?: "best-seller" | "other-products";
   title: string;
   image: string;
+  productCategory: string;
+  productPrice?: number;
+  productId: string;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   type,
   title,
   image,
+  productCategory,
+  productPrice,
+  productId,
 }) => {
   return (
-    <section className="relative">
-      <img
-        src={image}
-        alt={title}
-        className={`${
-          type?.match("best-seller")
-            ? "w-[240px] h-[420px]"
-            : "w-[240px] h-[240px]"
-        } object-cover rounded-[12px]`}
-      />
+    <section className="relative" id={productId}>
+      <Link href={'/products/'+productCategory+'/'+productId}>
+        <img
+          src={image}
+          alt={title}
+          className={`${
+            type?.match("best-seller")
+              ? "w-[240px] h-[420px]"
+              : "w-[240px] h-[240px]"
+          } object-cover rounded-[12px]`}
+        />
+      </Link>
       {type?.match("best-seller") && (
         <div className="absolute top-0 left-0 bg-[#C6613D] text-white px-2 py-1 rounded-[0px]">
           <p className="text-[12px]">Bán chạy</p>

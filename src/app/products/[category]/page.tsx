@@ -203,8 +203,10 @@ const ProductPage = ({
             .map(({ productId, productName, productImgUrl }) => (
               <ProductCard
                 key={productId}
+                productId={productId}
                 image={productImgUrl}
                 title={productName}
+                productCategory={type}
               />
             ))}
         </section>

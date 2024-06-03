@@ -77,7 +77,7 @@ const ProductPage = () => {
           </Link>
         </div>
       </section>
-      <section className="text-center">
+      {/* <section className="text-center">
         <h4 className="uppercase font-extrabold text-[36px]">
           Không biết bắt đầu từ đâu à?
         </h4>
@@ -91,7 +91,7 @@ const ProductPage = () => {
         <ProductCard image={Category_NenThom} title="Sample Product" />
         <ProductCard image={Category_NenThom} title="Sample Product" />
         <ProductCard image={Category_NenThom} title="Sample Product" />
-      </section>
+      </section> */}
     </main>
   );
 };
