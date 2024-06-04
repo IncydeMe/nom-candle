@@ -42,7 +42,6 @@ const SignupBody = () => {
         email: formData.email,
         password: formData.password,
       };
-      console.log(signupData);
       const response = await signup(signupData);
       toast({
         description: "Đăng ký thành công",

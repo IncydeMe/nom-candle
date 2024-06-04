@@ -42,7 +42,7 @@ const LoginBody = () => {
         duration: 3000,
       });
       localStorage.setItem("access-token", response.accessToken);
-      router.push("/");
+      window.location.replace("/");
     } catch (error) {
       console.error("Signup failed:", error);
     }
