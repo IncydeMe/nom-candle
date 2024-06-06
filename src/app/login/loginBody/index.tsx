@@ -10,7 +10,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import ProductBackground from "../../../../public/images/ProductBackground.png";
 import { login } from "@/utils/login";
-import { useRouter } from "next/navigation";
 
 import { useToast } from "@/components/ui/use-toast";
 
@@ -19,7 +18,6 @@ const LoginBody = () => {
     email: "",
     password: "",
   });
-  const router = useRouter();
   const { toast } = useToast();
 
   const handleChange = (e: any) => {

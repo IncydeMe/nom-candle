@@ -23,7 +23,7 @@ import { Heart } from "lucide-react";
 
 interface BlogCardProps {
   title: string;
-  image: StaticImageData;
+  image: StaticImageData | string;
 }
 
 export const SkeletonBlogCard: React.FC = () => {
@@ -83,7 +83,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ title, image }) => {
 interface ProductCardProps {
   type?: "best-seller" | "other-products";
   title: string;
-  image: string;
+  image: StaticImageData | string;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -94,7 +94,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <section className="relative">
       <img
-        src={image}
+        src={image as string}
         alt={title}
         className={`${
           type?.match("best-seller")

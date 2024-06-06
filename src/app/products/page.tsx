@@ -86,11 +86,39 @@ const ProductPage = () => {
           --
         </p>
       </section>
-      <section className="grid grid-cols-4 justify-items-center">
-        <ProductCard image={Category_NenThom} title="Sample Product" />
-        <ProductCard image={Category_NenThom} title="Sample Product" />
-        <ProductCard image={Category_NenThom} title="Sample Product" />
-        <ProductCard image={Category_NenThom} title="Sample Product" />
+      <section className="grid grid-cols-4 gap-2 justify-items-center">
+        <div className="flex flex-col">
+          <Image
+            className="object-cover rounded-[12px]"
+            src={Category_NenThom}
+            alt="Sample Product"
+          />
+          <span className="text-[12px] py-2 text-center">Sample Product</span>
+        </div>
+        <div className="flex flex-col">
+          <Image
+            className="object-cover rounded-[12px]"
+            src={Category_NenThom}
+            alt="Sample Product"
+          />
+          <span className="text-[12px] py-2 text-center">Sample Product</span>
+        </div>
+        <div className="flex flex-col">
+          <Image
+            className="object-cover rounded-[12px]"
+            src={Category_NenThom}
+            alt="Sample Product"
+          />
+          <span className="text-[12px] py-2 text-center">Sample Product</span>
+        </div>
+        <div className="flex flex-col">
+          <Image
+            className="object-cover rounded-[12px]"
+            src={Category_NenThom}
+            alt="Sample Product"
+          />
+          <span className="text-[12px] py-2 text-center">Sample Product</span>
+        </div>
       </section>
     </main>
   );

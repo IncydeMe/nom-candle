@@ -38,3 +38,12 @@ export const getProductByCategory = async (categoryId: string) => {
     return [];
   }
 };
+export const getProductById = async (productId: string) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/${productPath}/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching product category:", error);
+    return [];
+  }
+};

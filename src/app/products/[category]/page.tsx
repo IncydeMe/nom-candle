@@ -11,8 +11,9 @@ import { ProductCard } from "@/components/shared/custom-card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { getAllProduct } from "@/utils/product";
+import Link from "next/link";
 
-interface Product {
+export interface Product {
   productId: string;
   productName: string;
   productImgUrl: string;
@@ -64,6 +65,7 @@ const ProductPage = ({
   // };
 
   const [products, setProducts] = useState<Product[]>([]);
+
   useEffect(() => {
     const fetchProducts = async () => {
       const products = await getAllProduct();
@@ -72,7 +74,6 @@ const ProductPage = ({
 
     fetchProducts();
   }, []);
-  console.log(products);
 
   return (
     <main className="flex flex-col justify-center gap-4 text-[#C6613D]">
@@ -200,13 +201,16 @@ const ProductPage = ({
         <section className="col-span-2 grid grid-cols-4 gap-4 w-fit">
           {products
             .filter((product) => product.categoryName === type)
-            .map(({ productId, productName, productImgUrl }) => (
-              <ProductCard
-                key={productId}
-                image={productImgUrl}
-                title={productName}
-              />
-            ))}
+            .map(({ productId, productName, productImgUrl }) => {
+              return (
+                <Link
+                  href={`/products/${params.category}/${productId}`}
+                  key={productId}
+                >
+                  <ProductCard image={productImgUrl} title={productName} />
+                </Link>
+              );
+            })}
         </section>
       </section>
     </main>
