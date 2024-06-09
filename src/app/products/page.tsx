@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ProductBackground from "../../../public/images/ProductBackground.png";
 import UserBreadcrumb from "@/components/shared/breadcrumb";
@@ -13,9 +13,27 @@ import Category_SapThom from "../../../public/images/Category_SapThom.png";
 import Category_RoomSprays from "../../../public/images/Category_RoomSprays.png";
 import Category_KhuechTanTinhDau from "../../../public/images/Category_KhuechTanTinhDau.png";
 import Link from "next/link";
+import {
+  ProductCategory,
+  getAllProduct,
+  getRandomProducts,
+} from "@/utils/product";
 
 const ProductPage = () => {
-  const [value, setValue] = useState([0, 9000000]);
+  const [randomProducts, setRandomProducts] = useState<ProductCategory[]>([]);
+  console.log(randomProducts);
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        const fetchedAllProducts = await getAllProduct();
+        setRandomProducts(getRandomProducts(fetchedAllProducts, 4));
+      } catch (error) {
+        console.error("Error fetching all products:", error);
+      }
+    };
+
+    fetchAllProducts();
+  }, []);
 
   return (
     <main className="flex flex-col justify-center gap-4 text-[#C6613D]">
@@ -87,38 +105,15 @@ const ProductPage = () => {
         </p>
       </section>
       <section className="grid grid-cols-4 gap-2 justify-items-center">
-        <div className="flex flex-col">
-          <Image
-            className="object-cover rounded-[12px]"
-            src={Category_NenThom}
-            alt="Sample Product"
-          />
-          <span className="text-[12px] py-2 text-center">Sample Product</span>
-        </div>
-        <div className="flex flex-col">
-          <Image
-            className="object-cover rounded-[12px]"
-            src={Category_NenThom}
-            alt="Sample Product"
-          />
-          <span className="text-[12px] py-2 text-center">Sample Product</span>
-        </div>
-        <div className="flex flex-col">
-          <Image
-            className="object-cover rounded-[12px]"
-            src={Category_NenThom}
-            alt="Sample Product"
-          />
-          <span className="text-[12px] py-2 text-center">Sample Product</span>
-        </div>
-        <div className="flex flex-col">
-          <Image
-            className="object-cover rounded-[12px]"
-            src={Category_NenThom}
-            alt="Sample Product"
-          />
-          <span className="text-[12px] py-2 text-center">Sample Product</span>
-        </div>
+        {randomProducts.map((product) => (
+          <div className="flex flex-col">
+            <ProductCard
+              key={product.productId}
+              title={product.productName}
+              image={product.productImgUrl}
+            />
+          </div>
+        ))}
       </section>
     </main>
   );

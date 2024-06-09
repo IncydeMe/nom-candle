@@ -7,7 +7,11 @@ import Image from "next/image";
 
 import ProductImage from "../../../../../public/images/Product_Image.png";
 import { ProductCard } from "@/components/shared/custom-card";
-import { getAllProduct, getProductById } from "@/utils/product";
+import {
+  getAllProduct,
+  getProductById,
+  getRandomProducts,
+} from "@/utils/product";
 
 interface Product {
   productId: string;
@@ -33,19 +37,6 @@ export default function Page({
   const [allProduct, setAllProduct] = useState<Product>();
   const [randomProducts, setRandomProducts] = useState<ProductCategory[]>([]);
 
-  const getRandomProducts = (
-    products: Product[],
-    count: number
-  ): ProductCategory[] => {
-    const shuffled = products.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count).map((product) => ({
-      categoryName: product.categoryName,
-      productId: product.productId,
-      productImgUrl: product.productImgUrl,
-      productName: product.productName,
-    }));
-  };
-
   useEffect(() => {
     const fetchProducts = async () => {
       const products = await getProductById(params.id);
@@ -69,6 +60,7 @@ export default function Page({
     fetchAllProducts();
   }, []);
 
+  const imageFromData = products?.productImgUrl.toString();
   return (
     <div className="flex flex-col">
       <section className="flex justify-between items-end relative mt-12 ">
@@ -91,7 +83,7 @@ export default function Page({
       <section className="grid grid-cols-3 gap-4 mt-4">
         <div className="col-span-2">
           <Image
-            src={products?.productImgUrl.toString() || ProductImage}
+            src={imageFromData || ProductImage}
             width={500}
             height={500}
             objectFit="cover"
