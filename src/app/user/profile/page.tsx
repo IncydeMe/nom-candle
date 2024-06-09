@@ -1,10 +1,22 @@
+"use client";
+
+import { useEffect } from "react";
+import EditProfile from "./edit-profile/page";
+import { useRouter } from "next/navigation";
+
 function UserProfile() {
-    return ( 
-        <div>
-            <h1>User Profile</h1>
-            <p>Here is the user profile page</p>
-        </div>
-     );
+  const router = useRouter();
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access-token");
+    if (!accessToken) {
+      router.push("/login");
+    }
+  });
+  return (
+    <div>
+      <EditProfile />
+    </div>
+  );
 }
 
 export default UserProfile;

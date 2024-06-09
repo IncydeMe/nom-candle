@@ -1,9 +1,11 @@
-function EditProfile() {
-    return ( 
-        <div>
-            <h1>Edit Profile</h1>
-        </div>
-     );
+import EditProfileBody from "./edit-profile";
+
+function EditProfilePage() {
+  return (
+    <div>
+      <EditProfileBody />
+    </div>
+  );
 }
 
-export default EditProfile;
+export default EditProfilePage;
