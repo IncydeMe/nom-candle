@@ -1,61 +1,46 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { updateAccount } from "@/utils/account";
+import { getAccount, updateAccount } from "@/utils/account";
 
 const EditProfileBody = () => {
+  const accountId = localStorage.getItem("user-id");
   const { toast } = useToast();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  const initialFirstName = "";
-  const initialLastName = "";
-  const initialEmail = "";
-  const initialPassword = "";
-  const initialPhone = "";
-  const initialAddress = "";
+  useEffect(() => {
+    getAccount(accountId || "").then((account) => {
+      if (account) {
+        setFirstName(account.firstName);
+        setLastName(account.lastName);
+        setEmail(account.email);
+        setPhone(account.phone);
+        setAddress(account.address);
+      }
+    });
+  }, []);
 
   const handleUpdateAccount = async () => {
-    const accountId = "1"; // Replace with the actual accountId
-
-    // Check if any field has changed
-    if (
-      firstName === initialFirstName &&
-      lastName === initialLastName &&
-      email === initialEmail &&
-      password === initialPassword &&
-      phone === initialPhone &&
-      address === initialAddress
-    ) {
-      toast({
-        description:
-          "Từ thông tin cũ sang thông tin mới cũng không có quá nhiều sự thay đổi",
-        duration: 3000,
-      });
-      return;
-    }
-
     const accountData = {
       firstName,
       lastName,
-      roleId: 1, // Adjust this based on your needs
+      roleId: 1,
       email,
-      password,
       phone,
       address,
     };
 
     try {
-      await updateAccount(accountId, accountData);
+      await updateAccount(accountId || "", accountData);
       toast({
         description: "Cập nhật thông tin thành công",
         duration: 3000,
@@ -77,12 +62,8 @@ const EditProfileBody = () => {
           Quản lý thông tin hồ sơ để bảo mật tài khoản
         </div>
       </section>
-      <section>
-        <div className="flex items-center gap-3">
-          <Label>Tên đăng nhập: </Label>
-          <div>Name</div>
-        </div>
 
+      <section>
         <div className="flex gap-5">
           <div className="grow">
             <Label>Họ</Label>
@@ -101,8 +82,6 @@ const EditProfileBody = () => {
         </div>
         <Label>Email</Label>
         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Label>Password </Label>
-        <Input value={password} onChange={(e) => setPassword(e.target.value)} />
         <Label>Số điện thoại</Label>
         <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
         <Label>Địa chỉ</Label>

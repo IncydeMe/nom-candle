@@ -28,7 +28,6 @@ const LoginBody = () => {
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
     try {
       const signupData = {
         email: formData.email,
@@ -40,6 +39,7 @@ const LoginBody = () => {
         duration: 3000,
       });
       localStorage.setItem("access-token", response.accessToken);
+      localStorage.setItem("user-id", response.id);
       window.location.replace("/");
     } catch (error) {
       toast({

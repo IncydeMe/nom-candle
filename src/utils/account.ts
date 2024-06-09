@@ -5,7 +5,6 @@ interface AccountData {
   lastName: string;
   roleId: number;
   email: string;
-  password: string;
   phone: string;
   address: string;
 }
@@ -36,5 +35,16 @@ export const updateAccount = async (
   } catch (error) {
     console.error("Error updating account:", error);
     return [];
+  }
+};
+
+export const getAccount = async (accountId: string) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/${categoriesPath}/${accountId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching account:", error);
   }
 };
