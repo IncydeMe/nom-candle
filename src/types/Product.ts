@@ -1,10 +1,9 @@
-type Product = {
-    id: number;
-    name: string;
+export type Product = {
+    productId: string;
+    productName: string;
     description: string;
     price: number;
-    imageUrl: string;
-    category: string;
-    createdAt: string;
-    updatedAt: string;
+    productImgUrl: string;
+    categoryName: string;
+    size: string;
 }
