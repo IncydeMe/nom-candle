@@ -10,8 +10,21 @@ import { ShoppingCart } from "lucide-react";
 import Logo from "../../../public/images/sample_logo.png";
 import { Button } from "../ui/button";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
+
 const UserHeader = () => {
   const accessToken = localStorage.getItem("access-token");
+  const router = useRouter();
+  const handleLogout = () => {
+    localStorage.removeItem("access-token");
+    router.push("/login");
+  };
   return (
     <>
       <header className="flex w-screen h-fit justify-between px-10 items-center relative before:absolute before:left-[90px] before:bottom-0 before:h-[1px] before:w-[90%] before:border-[0.05rem] before:border-[#C6613D]">
@@ -75,21 +88,37 @@ const UserHeader = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="../user/profile"
-                  className="transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline"
-                >
-                  <CircleUserRound size={24} />
-                </Link>
+                <DropdownMenu modal={false}>
+                  <DropdownMenuTrigger asChild>
+                    <CircleUserRound className="cursor-pointer" size={24} />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="bg-white">
+                    <DropdownMenuItem>
+                      <Link
+                        href="../user/profile"
+                        className="transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline"
+                      >
+                        Hồ sơ cá nhân
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={handleLogout}
+                      className="transition-all cursor-pointer ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline"
+                    >
+                      Đăng xuất
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </li>
             </ul>
           </nav>
         )}
+
         {!accessToken && (
           <Link href={"/login"}>
             <Button
               size={"sm"}
-              className="text-white border border-[#c6613d] bg-[#c6613d] rounded-md hover:bg-[#c6613d]  "
+              className="text-white border border-[#c6613d] bg-[#c6613d] rounded-md hover:bg-[#c6613d]"
             >
               Log in
             </Button>

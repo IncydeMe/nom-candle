@@ -21,7 +21,6 @@ import {
 
 const ProductPage = () => {
   const [randomProducts, setRandomProducts] = useState<ProductCategory[]>([]);
-  console.log(randomProducts);
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {

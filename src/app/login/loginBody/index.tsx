@@ -42,7 +42,10 @@ const LoginBody = () => {
       localStorage.setItem("access-token", response.accessToken);
       window.location.replace("/");
     } catch (error) {
-      console.error("Signup failed:", error);
+      toast({
+        description: "Sai email hoặc mật khẩu",
+        duration: 3000,
+      });
     }
   };
 
