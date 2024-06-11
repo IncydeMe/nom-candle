@@ -4,6 +4,7 @@ import "./globals.css";
 import UserHeader from "@/components/shared/user-header";
 import UserFooter from "@/components/shared/user-footer";
 import { Toaster } from "@/components/ui/toaster";
+import GlobalProvider from "@/components/globalProvider";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -21,12 +22,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.className}>
         <section className="bg-[#FFEDD7] w-screen h-screen overflow-x-hidden">
-          <UserHeader />
-          <main className="min-h-screen overflow-x-hidden px-20 pt-5">
-            {children}
-          </main>
-          <Toaster />
-          <UserFooter />
+          <GlobalProvider>
+            <UserHeader />
+            <main className="min-h-screen overflow-x-hidden px-20 pt-5">
+              {children}
+            </main>
+            <Toaster />
+            <UserFooter />
+          </GlobalProvider>
         </section>
       </body>
     </html>

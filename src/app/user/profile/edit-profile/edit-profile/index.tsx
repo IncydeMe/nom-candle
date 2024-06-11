@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { getAccount, updateAccount } from "@/utils/account";
+import { getAccountById, updateAccount } from "@/utils/account";
 
 const EditProfileBody = () => {
   const accountId = localStorage.getItem("user-id");
@@ -18,7 +18,7 @@ const EditProfileBody = () => {
   const [address, setAddress] = useState("");
 
   useEffect(() => {
-    getAccount(accountId || "").then((account) => {
+    getAccountById(accountId || "").then((account) => {
       if (account) {
         setFirstName(account.firstName);
         setLastName(account.lastName);
