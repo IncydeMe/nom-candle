@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { REFUND_POLICY } from "@/constants/policy.data";
 import { useCart } from "./cartContext";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 function Cart() {
   const { cartItems } = useCart();
@@ -41,9 +42,11 @@ function Cart() {
         <div className="font-medium">
           Bạn đang có {cartItems.length || 0} sản phẩm
         </div>
-        <div className="cursor-pointer font-medium flex">
-          Tiếp tục mua hàng <ChevronRight />
-        </div>
+        <Link href={"/products"}>
+          <div className="cursor-pointer font-medium flex">
+            Tiếp tục mua hàng <ChevronRight />
+          </div>
+        </Link>
       </section>
 
       <section>

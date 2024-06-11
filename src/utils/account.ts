@@ -38,7 +38,7 @@ export const updateAccount = async (
   }
 };
 
-export const getAccount = async (accountId: string) => {
+export const getAccountById = async (accountId: string) => {
   try {
     const response = await axios.get(
       `${BASE_URL}/${categoriesPath}/${accountId}`
