@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { ChevronRight, MoveRight } from "lucide-react";
 import Image from "next/image";
 import cart_hero from "../../../../public/images/cart/cart_hero.png";
@@ -10,17 +9,13 @@ import TotalProductTable from "./totalProductTable";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { REFUND_POLICY } from "@/constants/policy.data";
+import { useCart } from "./cartContext";
 
 function Cart() {
-  const fakeTotalProduct = 4;
-
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    fetch("/api/candles")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  const { cartItems } = useCart();
+  const totalPrice = cartItems.reduce((sum, item) => {
+    return sum + item.price * item.quantity;
+  }, 0);
 
   return (
     <main className="text-[#C6613D]">
@@ -35,7 +30,7 @@ function Cart() {
 
       <section className="flex justify-between mt-6">
         <div className="font-medium">
-          Bạn đang có {fakeTotalProduct} sản phẩm
+          Bạn đang có {cartItems.length || 0} sản phẩm
         </div>
         <div className="cursor-pointer font-medium flex">
           Tiếp tục mua hàng <ChevronRight />
@@ -43,7 +38,7 @@ function Cart() {
       </section>
 
       <section>
-        <TotalProductTable />
+        <TotalProductTable data={cartItems} />
       </section>
 
       <section>
@@ -52,7 +47,7 @@ function Cart() {
       </section>
 
       <section className="flex items-center justify-between bg-[#EBCBA5] mt-7">
-        <div className="grow ml-3">TỔNG TIỀN:</div>
+        <div className="grow ml-3">TỔNG TIỀN: {totalPrice}</div>
         <Button className="border-l mr-3 border-white">Thanh toán</Button>
       </section>
 

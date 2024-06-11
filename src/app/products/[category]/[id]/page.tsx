@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import UserBreadcrumb from "@/components/shared/breadcrumb";
 
 import Image from "next/image";
@@ -12,6 +12,7 @@ import {
   getProductById,
   getRandomProducts,
 } from "@/utils/product";
+import { CartContext } from "@/app/user/cart/cartContext";
 
 interface Product {
   productId: string;
@@ -33,17 +34,22 @@ export default function Page({
 }: {
   params: { id: string; category: string };
 }) {
-  const [products, setProducts] = useState<Product>();
+  const { addToCart } = useContext(CartContext);
+  const [product, setProduct] = useState<Product>();
   const [allProduct, setAllProduct] = useState<Product>();
   const [randomProducts, setRandomProducts] = useState<ProductCategory[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const products = await getProductById(params.id);
-      setProducts(products);
+    const fetchProduct = async () => {
+      try {
+        const product = await getProductById(params.id);
+        setProduct(product);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
     };
 
-    fetchProducts();
+    fetchProduct();
   }, []);
 
   useEffect(() => {
@@ -59,8 +65,24 @@ export default function Page({
 
     fetchAllProducts();
   }, []);
+  const productPrice = product?.price?.toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
 
-  const imageFromData = products?.productImgUrl.toString();
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart({
+        productId: product.productId,
+        productName: product.productName,
+        productImgUrl: product?.productImgUrl,
+        price: product.price,
+        quantity: 1,
+      });
+    }
+  };
+
+  // const imageFromData = products?.productImgUrl.toString();
   return (
     <div className="flex flex-col">
       <section className="flex justify-between items-end relative mt-12 ">
@@ -83,7 +105,7 @@ export default function Page({
       <section className="grid grid-cols-3 gap-4 mt-4">
         <div className="col-span-2">
           <Image
-            src={imageFromData || ProductImage}
+            src={ProductImage}
             width={500}
             height={500}
             objectFit="cover"
@@ -94,24 +116,24 @@ export default function Page({
         <div className="">
           <div className="flex flex-col gap-4">
             <h4 className="text-[24px] font-semibold text-[#C6613D]">
-              {products?.productName}{" "}
+              {product?.productName}{" "}
             </h4>
             <em className="text-[#C6613D]">
-              {products?.description} <br />
+              {product?.description} <br />
               Mùi hương: Lê Nghĩa. <br />
             </em>
             <p className="text-[16px] font-semibold text-[#C6613D]">
-              {products?.price.toLocaleString("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              })}
+              {productPrice}{" "}
             </p>
             <div className="flex justify-between">
               <button className="w-[200px] h-[40px] bg-[#C6613D] hover:bg-[#8d442a] text-white transition-colors ease-in-out duration-500 rounded-[8px]">
-                Buy Now
+                Mua ngay
               </button>
-              <button className="w-[200px] h-[40px] bg-none hover:bg-[#C6613D] border-[1px] border-[#C6613D] text-[#C6613D] hover:text-white transition-all ease-in-out duration-300 rounded-[8px]">
-                Add to Cart
+              <button
+                onClick={handleAddToCart}
+                className="w-[200px] h-[40px] bg-none hover:bg-[#C6613D] border-[1px] border-[#C6613D] text-[#C6613D] hover:text-white transition-all ease-in-out duration-300 rounded-[8px]"
+              >
+                Thêm vào giỏ hàng
               </button>
             </div>
           </div>

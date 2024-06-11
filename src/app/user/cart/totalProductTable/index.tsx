@@ -8,8 +8,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TABLE_DATA, TABLE_HEADER } from "@/constants/table.data";
-const TotalProductTable = () => {
+import { TABLE_HEADER } from "@/constants/table.data";
+
+interface Product {
+  productId: string;
+  productName: string;
+  price: number;
+  quantity: number;
+}
+const TotalProductTable = ({ data }: { data: Product[] }) => {
+  const productMap = new Map<
+    string,
+    { productId: string; productName: string; price: number; quantity: number }
+  >();
+
+  data.forEach((product) => {
+    if (productMap.has(product.productId)) {
+      const existingProduct = productMap.get(product.productId)!;
+      existingProduct.quantity += product.quantity;
+    } else {
+      productMap.set(product.productId, { ...product });
+    }
+  });
+
+  const uniqueProducts = Array.from(productMap.values());
+
   return (
     <>
       <Table className="bg-[#EBCBA5] border border-[#EBCBA5] mt-10">
@@ -26,16 +49,16 @@ const TotalProductTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {TABLE_DATA.map(({ id, name, quantity, productDefaultPrice }) => {
-            const productPrice = productDefaultPrice * quantity;
-            return (
-              <>
-                <TableRow key={id}>
+          {uniqueProducts.map(
+            ({ productId, productName, quantity, price }, index) => {
+              const productPrice = price * quantity;
+              return (
+                <TableRow key={productId}>
                   <TableCell className="text-center border-b border-l border-r first:border-l-0 last:border-r-0 border-white">
-                    {id}
+                    {index}
                   </TableCell>
                   <TableCell className="text-center border-b border-l border-r first:border-l-0 last:border-r-0 border-white">
-                    {name}
+                    {productName}
                   </TableCell>
                   <TableCell className="text-center border-b border-l border-r first:border-l-0 last:border-r-0 border-white">
                     {quantity}
@@ -44,9 +67,9 @@ const TotalProductTable = () => {
                     {productPrice}
                   </TableCell>
                 </TableRow>
-              </>
-            );
-          })}
+              );
+            }
+          )}
         </TableBody>
       </Table>
     </>
