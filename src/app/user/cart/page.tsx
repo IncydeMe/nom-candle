@@ -10,13 +10,22 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { REFUND_POLICY } from "@/constants/policy.data";
 import { useCart } from "./cartContext";
+import { useEffect, useState } from "react";
 
 function Cart() {
   const { cartItems } = useCart();
-  const totalPrice = cartItems.reduce((sum, item) => {
-    return sum + item.price * item.quantity;
-  }, 0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
+  useEffect(() => {
+    updateTotalPrice();
+  }, [cartItems]);
+
+  const updateTotalPrice = () => {
+    const totalPrice = cartItems.reduce((sum, item) => {
+      return sum + item.price * item.quantity;
+    }, 0);
+    setTotalPrice(totalPrice);
+  };
   return (
     <main className="text-[#C6613D]">
       <Image src={cart_hero} alt="cartHero" />
@@ -38,7 +47,7 @@ function Cart() {
       </section>
 
       <section>
-        <TotalProductTable data={cartItems} />
+        <TotalProductTable data={cartItems} setTotalPrice={setTotalPrice} />
       </section>
 
       <section>
