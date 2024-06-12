@@ -134,7 +134,7 @@ const TotalProductTable = ({
                   />
                 </TableCell>
                 <TableCell className="text-center border-b border-l border-r first:border-l-0 last:border-r-0 border-white">
-                  {productPrice}
+                  {productPrice.toLocaleString()}
                 </TableCell>
               </TableRow>
             );

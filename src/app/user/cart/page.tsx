@@ -53,14 +53,13 @@ function Cart() {
         <TotalProductTable data={cartItems} setTotalPrice={setTotalPrice} />
       </section>
 
-      <section>
-        <div className="font-medium mt-8">Ghi chú đơn hàng:</div>
-        <Input className="bg-[#EBCBA5] border border-[#EBCBA5]" />
-      </section>
-
       <section className="flex items-center justify-between bg-[#EBCBA5] mt-7">
-        <div className="grow ml-3">TỔNG TIỀN: {totalPrice}</div>
-        <Button className="border-l mr-3 border-white">Thanh toán</Button>
+        <div className="grow ml-3">
+          TỔNG TIỀN: {totalPrice.toLocaleString()}
+        </div>
+        <Link href={"/checkout"}>
+          <Button className="border-l mr-3 border-white">Thanh toán</Button>
+        </Link>
       </section>
 
       <section className="mt-8">
