@@ -17,8 +17,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/app/user/cart/cartContext";
+import { Badge } from "../ui/badge";
 
 const UserHeader = () => {
+  const { cartItems } = useCart();
+
   const accessToken = localStorage.getItem("access-token");
   const router = useRouter();
   const handleLogout = () => {
@@ -91,12 +95,15 @@ const UserHeader = () => {
         {accessToken && (
           <nav>
             <ul className="flex justify-around gap-x-6 text-[#C6613D]">
-              <li>
+              <li className="relative">
                 <Link
                   href="../user/cart"
                   className="transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline"
                 >
                   <ShoppingCart size={24} />
+                  <Badge className=" absolute -right-[12px] -top-[10px] border-[2px] border-white flex justify-center w-[15px] bg-[#a25032] text-white hover:bg-[#a25032]">
+                    {cartItems.length}
+                  </Badge>
                 </Link>
               </li>
               <li>
