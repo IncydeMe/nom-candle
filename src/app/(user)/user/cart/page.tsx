@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { ChevronRight, MoveRight } from "lucide-react";
 import Image from "next/image";
 import cart_hero from "../../../../public/images/cart/cart_hero.png";
@@ -10,18 +9,24 @@ import TotalProductTable from "./totalProductTable";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { REFUND_POLICY } from "@/constants/policy.data";
+import { useCart } from "./cartContext";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 function Cart() {
-  const fakeTotalProduct = 4;
+  const { cartItems } = useCart();
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("/api/candles")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+    updateTotalPrice();
+  }, [cartItems]);
 
+  const updateTotalPrice = () => {
+    const totalPrice = cartItems.reduce((sum, item) => {
+      return sum + item.price * item.quantity;
+    }, 0);
+    setTotalPrice(totalPrice);
+  };
   return (
     <main className="text-[#C6613D]">
       <Image src={cart_hero} alt="cartHero" />
@@ -35,25 +40,26 @@ function Cart() {
 
       <section className="flex justify-between mt-6">
         <div className="font-medium">
-          Bạn đang có {fakeTotalProduct} sản phẩm
+          Bạn đang có {cartItems.length || 0} sản phẩm
         </div>
-        <div className="cursor-pointer font-medium flex">
-          Tiếp tục mua hàng <ChevronRight />
-        </div>
+        <Link href={"/products"}>
+          <div className="cursor-pointer font-medium flex">
+            Tiếp tục mua hàng <ChevronRight />
+          </div>
+        </Link>
       </section>
 
       <section>
-        <TotalProductTable />
-      </section>
-
-      <section>
-        <div className="font-medium mt-8">Ghi chú đơn hàng:</div>
-        <Input className="bg-[#EBCBA5] border border-[#EBCBA5]" />
+        <TotalProductTable data={cartItems} setTotalPrice={setTotalPrice} />
       </section>
 
       <section className="flex items-center justify-between bg-[#EBCBA5] mt-7">
-        <div className="grow ml-3">TỔNG TIỀN:</div>
-        <Button className="border-l mr-3 border-white">Thanh toán</Button>
+        <div className="grow ml-3">
+          TỔNG TIỀN: {totalPrice.toLocaleString()}
+        </div>
+        <Link href={"/checkout"}>
+          <Button className="border-l mr-3 border-white">Thanh toán</Button>
+        </Link>
       </section>
 
       <section className="mt-8">

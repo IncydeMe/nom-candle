@@ -23,7 +23,7 @@ import { Heart } from "lucide-react";
 
 interface BlogCardProps {
   title: string;
-  image: StaticImageData;
+  image: StaticImageData | string;
 }
 
 export const SkeletonBlogCard: React.FC = () => {
