@@ -9,10 +9,12 @@ import { getAccountById, updateAccount } from "@/utils/account";
 
 const EditProfileBody = () => {
   const accountId = localStorage.getItem("user-id");
+
   const { toast } = useToast();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -33,6 +35,7 @@ const EditProfileBody = () => {
     const accountData = {
       firstName,
       lastName,
+      password,
       roleId: 1,
       email,
       phone,
@@ -82,6 +85,8 @@ const EditProfileBody = () => {
         </div>
         <Label>Email</Label>
         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Label>Mật khẩu mới</Label>
+        <Input value={password} onChange={(e) => setPassword(e.target.value)} />
         <Label>Số điện thoại</Label>
         <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
         <Label>Địa chỉ</Label>

@@ -14,8 +14,33 @@ import { useCart } from "@/app/user/cart/cartContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import PaymentMethod from "./paymentMethod";
+import { createOrder } from "@/utils/order";
+import { getAccountById } from "@/utils/account";
 
+interface UserInformation {
+  accountId: string;
+  firstName: string;
+  lastName: string;
+  roleId: number;
+  email: string;
+  phone: string;
+  address: string;
+}
 const CheckoutMain = () => {
+  const accountId = localStorage.getItem("user-id");
+  const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const [userInformation, setUserInformation] =
+    useState<UserInformation | null>(null);
+  const userAddress = userInformation?.address;
+  const province = userAddress?.split(",")[3].trim();
+  const district = userAddress?.split(",")[2].trim();
+
+  useEffect(() => {
+    getAccountById(accountId || "").then((account) => {
+      setUserInformation(account);
+    });
+  }, []);
+
   const { cartItems } = useCart();
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
@@ -29,15 +54,39 @@ const CheckoutMain = () => {
     setTotalPrice(totalPrice);
   };
 
+  const handleCreateOrder = async () => {
+    try {
+      const userInfomation = {
+        customerFullname:
+          userInformation?.lastName + " " + userInformation?.firstName,
+        email: userInformation?.email,
+        phone: userInformation?.phone,
+        address: userInformation?.address,
+        province: province,
+        district: district,
+        paymentMethod: paymentMethod,
+        totalPrice: totalPrice,
+      };
+      const orderDetails = cartItems.map((item) => ({
+        productId: item.productId,
+        quantity: item.quantity,
+      }));
+      await createOrder(userInfomation, orderDetails);
+      console.log("Order created successfully");
+    } catch (error) {
+      console.error("Error fetching account:", error);
+    }
+  };
+
   return (
     <>
       <div className="mt-3 px-5 py-6 shadow-[0_1px_1px_0_rgba(0,0,0,0.05)] bg-orange-50">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Sản phẩm</TableHead>
-              <TableHead>Đơn giá</TableHead>
-              <TableHead>Số lượng</TableHead>
+              <TableHead>Sản phẩm</TableHead>
+              <TableHead className="text-center">Đơn giá</TableHead>
+              <TableHead className="text-center">Số lượng</TableHead>
               <TableHead className="text-right">Thành tiền</TableHead>
             </TableRow>
           </TableHeader>
@@ -47,8 +96,12 @@ const CheckoutMain = () => {
                 <TableCell className="font-medium">
                   {item.productName}
                 </TableCell>
-                <TableCell className="font-medium">{item.price}</TableCell>
-                <TableCell className="font-medium">{item.quantity}</TableCell>
+                <TableCell className="font-medium text-center">
+                  {item.price}
+                </TableCell>
+                <TableCell className="font-medium text-center">
+                  {item.quantity}
+                </TableCell>
                 <TableCell className="text-right font-medium">
                   {(item.price * item.quantity).toLocaleString()}
                 </TableCell>
@@ -72,10 +125,10 @@ const CheckoutMain = () => {
       </section>
 
       <section>
-        <PaymentMethod />
+        <PaymentMethod setPaymentMethod={setPaymentMethod} />
       </section>
 
-      <div className="flex justify-end my-4">
+      <div onClick={handleCreateOrder} className="flex justify-end mt-4 mb-6">
         <Button className="bg-[#a25032] text-white hover:bg-[#a25032]">
           Đặt hàng
         </Button>

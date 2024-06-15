@@ -2,11 +2,11 @@ const axios = require("axios");
 
 export type orderInformation = {
   customerFullname: string;
-  email: string;
-  phone: string;
-  address: string;
-  province: string;
-  district: string;
+  email: string | undefined;
+  phone: string | undefined;
+  address: string | undefined;
+  province: string | undefined;
+  district: string | undefined;
   paymentMethod: string;
   totalPrice: number;
 };
@@ -43,11 +43,10 @@ export const createOrder = async (
   orderDetails: orderDetails[]
 ) => {
   try {
-    const response = await axios.get(
-      `${BASE_URL}/${productPath}/create`,
+    const response = await axios.post(`${BASE_URL}/${productPath}/create`, {
       orderInfo,
-      orderDetails
-    );
+      orderDetails,
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching account:", error);

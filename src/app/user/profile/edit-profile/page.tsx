@@ -1,4 +1,4 @@
-import EditProfileBody from "./edit-profile";
+import EditProfileBody from "./edit-profile-body";
 
 function EditProfilePage() {
   return (
