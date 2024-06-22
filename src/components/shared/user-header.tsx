@@ -97,7 +97,7 @@ const UserHeader = () => {
             <ul className="flex justify-around gap-x-6 text-[#C6613D]">
               <li className="relative">
                 <Link
-                  href="../user/cart"
+                  href="/user/cart"
                   className="transition-all ease-in-out duration-300 hover:text-[#a25032] hover:font-bold hover:underline"
                 >
                   <ShoppingCart size={24} />
