@@ -1,6 +1,10 @@
 const axios = require("axios");
 
-export type orderInformation = {
+interface AdditonalProps {
+  orderId?: string;
+  orderStatus?: string;
+}
+export interface OrderInformation extends AdditonalProps {
   customerFullname: string;
   email: string | undefined;
   phone: string | undefined;
@@ -9,7 +13,7 @@ export type orderInformation = {
   district: string | undefined;
   paymentMethod: string;
   totalPrice: number;
-};
+}
 
 export type orderDetails = {
   productId: string;
@@ -39,7 +43,7 @@ export const getOrderById = async (orderId: string) => {
 };
 
 export const createOrder = async (
-  orderInfo: orderInformation,
+  orderInfo: OrderInformation,
   orderDetails: orderDetails[]
 ) => {
   try {
