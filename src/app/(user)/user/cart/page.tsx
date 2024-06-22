@@ -6,7 +6,6 @@ import cart_hero from "../../../../public/images/cart/cart_hero.png";
 import UserBreadcrumb from "@/components/shared/breadcrumb";
 
 import TotalProductTable from "./totalProductTable";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { REFUND_POLICY } from "@/constants/policy.data";
 import { useCart } from "./cartContext";
@@ -67,7 +66,7 @@ function Cart() {
         <div className="ml-5 flex flex-col gap-2">
           {REFUND_POLICY.map((data) => {
             return (
-              <div className="flex gap-2">
+              <div key={data} className="flex gap-2">
                 <MoveRight className="min-w-[24px]" />
                 <span className="shrink">{data}</span>
               </div>

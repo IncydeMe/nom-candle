@@ -9,10 +9,14 @@ export const TABLE_HEADER = [
   },
   {
     id: 3,
-    name: "Số lượng",
+    name: "Giá tiền",
   },
   {
     id: 4,
+    name: "Số lượng",
+  },
+  {
+    id: 5,
     name: "Thành tiền",
   },
 ];

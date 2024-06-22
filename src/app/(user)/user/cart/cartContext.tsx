@@ -1,6 +1,4 @@
 "use client";
-
-// CartContext.tsx
 import React, {
   ReactNode,
   createContext,
@@ -9,32 +7,33 @@ import React, {
   useState,
 } from "react";
 
-// Define the shape of a product
 interface Product {
   productId: string;
   productName: string;
   productImgUrl: string;
   price: number;
   quantity: number;
+  totalPrice?: number;
 }
 
-// Define the context type
 interface CartContextType {
   cartItems: Product[];
   addToCart: (product: Product) => void;
+  removeFromCart: (productId: string) => void;
+  updateCartQuantity: (productId: string, quantity: number) => void;
 }
 
 interface Props {
   children: ReactNode;
 }
 
-// Create the context
 export const CartContext = createContext<CartContextType>({
   cartItems: [],
   addToCart: () => {},
+  removeFromCart: () => {},
+  updateCartQuantity: () => {},
 });
 
-// Cart provider component
 export const CartProvider: React.FC<Props> = ({ children }) => {
   const [cartItems, setCartItems] = useState<Product[]>(() => {
     if (typeof window !== "undefined") {
@@ -49,17 +48,42 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
   }, [cartItems]);
 
   const addToCart = (product: Product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
+    setCartItems((prevItems) => {
+      const existingProductIndex = prevItems.findIndex(
+        (item) => item.productId === product.productId
+      );
+      if (existingProductIndex >= 0) {
+        const updatedItems = [...prevItems];
+        updatedItems[existingProductIndex].quantity += product.quantity;
+        return updatedItems;
+      }
+      return [...prevItems, product];
+    });
+  };
+
+  const removeFromCart = (productId: string) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.productId !== productId)
+    );
+  };
+
+  const updateCartQuantity = (productId: string, quantity: number) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.productId === productId ? { ...item, quantity } : item
+      )
+    );
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart }}>
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeFromCart, updateCartQuantity }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
-// Custom hook to use the cart context
 export const useCart = () => {
   return useContext(CartContext);
 };

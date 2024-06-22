@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import PaymentMethod from "./paymentMethod";
 import { createOrder } from "@/utils/order";
 import { getAccountById } from "@/utils/account";
+import { useToast } from "@/components/ui/use-toast";
+import { SquareMinus, SquarePlus } from "lucide-react"; // Add import
 
 interface UserInformation {
   accountId: string;
@@ -26,11 +28,16 @@ interface UserInformation {
   phone: string;
   address: string;
 }
+
 const CheckoutMain = () => {
-  const accountId = localStorage.getItem("user-id");
+  const { toast } = useToast();
+  const { cartItems, updateCartQuantity } = useCart(); // Add updateCartQuantity
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [userInformation, setUserInformation] =
     useState<UserInformation | null>(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const accountId = localStorage.getItem("user-id");
   const userAddress = userInformation?.address;
   const province = userAddress?.split(",")[3].trim();
   const district = userAddress?.split(",")[2].trim();
@@ -41,17 +48,15 @@ const CheckoutMain = () => {
     });
   }, []);
 
-  const { cartItems } = useCart();
-  const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     updateTotalPrice();
   }, [cartItems]);
 
   const updateTotalPrice = () => {
-    const totalPrice = cartItems.reduce((sum, item) => {
+    const newTotalPrice = cartItems.reduce((sum, item) => {
       return sum + item.price * item.quantity;
     }, 0);
-    setTotalPrice(totalPrice);
+    setTotalPrice(newTotalPrice);
   };
 
   const handleCreateOrder = async () => {
@@ -72,9 +77,29 @@ const CheckoutMain = () => {
         quantity: item.quantity,
       }));
       await createOrder(userInfomation, orderDetails);
-      console.log("Order created successfully");
+      toast({
+        description: "Tạo đơn hàng thành công",
+        duration: 3000,
+      });
     } catch (error) {
-      console.error("Error fetching account:", error);
+      toast({
+        description: "Tạo đơn hàng thất bại",
+        duration: 3000,
+      });
+    }
+  };
+
+  const increaseQuantity = (productId: string) => {
+    const product = cartItems.find((item) => item.productId === productId);
+    if (product) {
+      updateCartQuantity(productId, product.quantity + 1);
+    }
+  };
+
+  const decreaseQuantity = (productId: string) => {
+    const product = cartItems.find((item) => item.productId === productId);
+    if (product && product.quantity > 1) {
+      updateCartQuantity(productId, product.quantity - 1);
     }
   };
 

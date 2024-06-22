@@ -1,145 +1,81 @@
-import React, { useEffect, useState } from "react";
-
+"use client";
+import React from "react";
 import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TABLE_HEADER } from "@/constants/table.data";
-import { SquareMinus, SquarePlus } from "lucide-react";
+import { SquareMinus, SquarePlus } from "lucide-react"; // Add import
+import { useCart } from "@/app/user/cart/cartContext";
 
 interface Product {
   productId: string;
   productName: string;
+  productImgUrl: string;
   price: number;
   quantity: number;
+  totalPrice: number;
 }
-const TotalProductTable = ({
-  data,
-  setTotalPrice,
-}: {
+interface TotalProductTableProps {
   data: Product[];
-  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
-}) => {
-  const productMap = new Map<
-    string,
-    { productId: string; productName: string; price: number; quantity: number }
-  >();
+}
 
-  data.forEach((product) => {
-    if (productMap.has(product.productId)) {
-      const existingProduct = productMap.get(product.productId)!;
-      existingProduct.quantity += product.quantity;
-    } else {
-      productMap.set(product.productId, { ...product });
-    }
-  });
-
-  const [uniqueProducts, setUniqueProducts] = useState(
-    Array.from(productMap.values())
-  );
-  const decreaseQuantity = (productId: string) => {
-    const updatedProducts = uniqueProducts
-      .map((product) => {
-        if (product.productId === productId && product.quantity > 0) {
-          const newQuantity = product.quantity - 1;
-          if (newQuantity === 0) {
-            removeFromLocalStorage(productId);
-            return null;
-          } else {
-            return {
-              ...product,
-              quantity: newQuantity,
-            };
-          }
-        }
-        return product;
-      })
-      .filter(Boolean) as Product[];
-
-    setUniqueProducts(updatedProducts);
-  };
-  const removeFromLocalStorage = (productId: string) => {
-    const storedProducts = JSON.parse(
-      localStorage.getItem("cartItems") || "[]"
-    );
-    const updatedStorage = storedProducts.filter(
-      (product: Product) => product.productId !== productId
-    );
-    localStorage.setItem("cartItems", JSON.stringify(updatedStorage));
-  };
+const TotalProductTable: React.FC<TotalProductTableProps> = ({ data }) => {
+  const { updateCartQuantity } = useCart();
 
   const increaseQuantity = (productId: string) => {
-    const updatedProducts = uniqueProducts.map((product) => {
-      if (product.productId === productId) {
-        return {
-          ...product,
-          quantity: product.quantity + 1,
-        };
-      }
-      return product;
-    });
-
-    setUniqueProducts(updatedProducts);
-    localStorage.setItem("cartItems", JSON.stringify(updatedProducts));
+    const product = data.find((item) => item.productId === productId);
+    if (product) {
+      updateCartQuantity(productId, product.quantity + 1);
+    }
   };
 
-  useEffect(() => {
-    const totalPrice = uniqueProducts.reduce((sum, { price, quantity }) => {
-      return sum + price * quantity;
-    }, 0);
-    setTotalPrice(totalPrice);
-  }, [uniqueProducts, setTotalPrice]);
+  const decreaseQuantity = (productId: string) => {
+    const product = data.find((item) => item.productId === productId);
+    if (product && product.quantity > 1) {
+      updateCartQuantity(productId, product.quantity - 1);
+    }
+  };
 
   return (
-    <Table className="bg-[#EBCBA5] border border-[#EBCBA5] mt-10">
+    <Table>
       <TableHeader>
         <TableRow>
-          {TABLE_HEADER.map((headerGroup) => (
-            <TableHead
-              className="text-center border-b border-l  border-r first:border-l-0 last:border-r-0 border-white"
-              key={headerGroup.id}
-            >
-              {headerGroup.name}
-            </TableHead>
-          ))}
+          <TableHead>Sản phẩm</TableHead>
+          <TableHead className="text-center">Đơn giá</TableHead>
+          <TableHead className="text-center">Số lượng</TableHead>
+          <TableHead className="text-right">Thành tiền</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {uniqueProducts.map(
-          ({ productId, productName, quantity, price }, index) => {
-            const productPrice = price * quantity;
-            return (
-              <TableRow key={productId}>
-                <TableCell className="text-center border-b border-l border-r first:border-l-0 last:border-r-0 border-white">
-                  {index}
-                </TableCell>
-                <TableCell className="text-center border-b border-l border-r first:border-l-0 last:border-r-0 border-white">
-                  {productName}
-                </TableCell>
-                <TableCell className="flex gap-2 items-center justify-center text-center border-b border-l border-r first:border-l-0 last:border-r-0 border-white">
-                  <SquareMinus
-                    onClick={() => decreaseQuantity(productId)}
-                    size={20}
-                    className="cursor-pointer"
-                  />
-                  {quantity}
-                  <SquarePlus
-                    onClick={() => increaseQuantity(productId)}
-                    size={20}
-                    className="cursor-pointer"
-                  />
-                </TableCell>
-                <TableCell className="text-center border-b border-l border-r first:border-l-0 last:border-r-0 border-white">
-                  {productPrice.toLocaleString()}
-                </TableCell>
-              </TableRow>
-            );
-          }
-        )}
+        {data.map((item) => (
+          <TableRow key={item.productId}>
+            <TableCell className="font-medium">{item.productName}</TableCell>
+            <TableCell className="font-medium text-center">
+              {item.price}
+            </TableCell>
+            <TableCell className="flex gap-3 justify-center font-medium text-center">
+              <SquareMinus
+                onClick={() => decreaseQuantity(item.productId)}
+                size={20}
+                className="cursor-pointer"
+              />
+              {item.quantity}
+              <SquarePlus
+                onClick={() => increaseQuantity(item.productId)}
+                size={20}
+                className="cursor-pointer"
+              />
+            </TableCell>
+            <TableCell className="text-right font-medium">
+              {(item.price * item.quantity).toLocaleString()}
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );
