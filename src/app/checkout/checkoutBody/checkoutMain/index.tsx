@@ -66,7 +66,7 @@ const CheckoutMain = () => {
     } else {
       try {
         const userInfomation = {
-          customerFullname:
+          customerFullName:
             userInformation?.lastName + " " + userInformation?.firstName,
           email: userInformation?.email,
           phone: userInformation?.phone,

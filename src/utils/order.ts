@@ -5,7 +5,7 @@ interface AdditonalProps {
   orderStatus?: string;
 }
 export interface OrderInformation extends AdditonalProps {
-  customerFullname: string;
+  customerFullName: string;
   email: string | undefined;
   phone: string | undefined;
   address: string | undefined;
