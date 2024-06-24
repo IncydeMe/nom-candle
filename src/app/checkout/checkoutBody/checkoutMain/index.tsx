@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -17,7 +16,6 @@ import PaymentMethod from "./paymentMethod";
 import { createOrder } from "@/utils/order";
 import { getAccountById } from "@/utils/account";
 import { useToast } from "@/components/ui/use-toast";
-import { SquareMinus, SquarePlus } from "lucide-react"; // Add import
 
 interface UserInformation {
   accountId: string;
@@ -60,46 +58,39 @@ const CheckoutMain = () => {
   };
 
   const handleCreateOrder = async () => {
-    try {
-      const userInfomation = {
-        customerFullname:
-          userInformation?.lastName + " " + userInformation?.firstName,
-        email: userInformation?.email,
-        phone: userInformation?.phone,
-        address: userInformation?.address,
-        province: province,
-        district: district,
-        paymentMethod: paymentMethod,
-        totalPrice: totalPrice,
-      };
-      const orderDetails = cartItems.map((item) => ({
-        productId: item.productId,
-        quantity: item.quantity,
-      }));
-      await createOrder(userInfomation, orderDetails);
+    if (paymentMethod === "") {
       toast({
-        description: "Tạo đơn hàng thành công",
+        description: "Vui lòng chọn phương thức thanh toán",
         duration: 3000,
       });
-    } catch (error) {
-      toast({
-        description: "Tạo đơn hàng thất bại",
-        duration: 3000,
-      });
-    }
-  };
-
-  const increaseQuantity = (productId: string) => {
-    const product = cartItems.find((item) => item.productId === productId);
-    if (product) {
-      updateCartQuantity(productId, product.quantity + 1);
-    }
-  };
-
-  const decreaseQuantity = (productId: string) => {
-    const product = cartItems.find((item) => item.productId === productId);
-    if (product && product.quantity > 1) {
-      updateCartQuantity(productId, product.quantity - 1);
+    } else {
+      try {
+        const userInfomation = {
+          customerFullName:
+            userInformation?.lastName + " " + userInformation?.firstName,
+          email: userInformation?.email,
+          phone: userInformation?.phone,
+          address: userInformation?.address,
+          province: province,
+          district: district,
+          paymentMethod: paymentMethod,
+          totalPrice: totalPrice,
+        };
+        const orderDetails = cartItems.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+        }));
+        await createOrder(userInfomation, orderDetails);
+        toast({
+          description: "Tạo đơn hàng thành công",
+          duration: 3000,
+        });
+      } catch (error) {
+        toast({
+          description: "Tạo đơn hàng thất bại",
+          duration: 3000,
+        });
+      }
     }
   };
 
