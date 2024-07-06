@@ -201,13 +201,18 @@ const ProductPage = ({
         <section className="col-span-2 grid grid-cols-4 gap-4 w-fit">
           {products
             .filter((product) => product.categoryName === type)
-            .map(({ productId, productName, productImgUrl }) => {
+            .map(({ productId, productName, productImgUrl, categoryName }) => {
               return (
                 <Link
                   href={`/products/${params.category}/${productId}`}
                   key={productId}
                 >
-                  <ProductCard image={productImgUrl} title={productName} />
+                  <ProductCard 
+                    image={productImgUrl} 
+                    title={productName} 
+                    productId={productId}
+                    productCategory={categoryName}
+                  />
                 </Link>
               );
             })}
