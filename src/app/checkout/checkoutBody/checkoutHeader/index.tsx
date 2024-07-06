@@ -13,9 +13,9 @@ const CheckoutHeader = () => {
   //For localStorage
   let accountId: any;
   if (typeof window !== "undefined") {
-    accountId = window.localStorage.getItem("user-id");
+    accountId = localStorage.getItem("user-id");
   }
-  
+
   const [account, setAccount] = useState<Account | null>(null);
 
   useEffect(() => {

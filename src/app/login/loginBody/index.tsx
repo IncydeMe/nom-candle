@@ -42,8 +42,8 @@ const LoginBody = () => {
       });
       //For localStorage
       if( typeof window !== 'undefined' || window !== null) {
-        window.localStorage.setItem("access-token", response.accessToken);
-        window.localStorage.setItem("user-id", response.id);
+        localStorage.setItem("access-token", response.accessToken);
+        localStorage.setItem("user-id", response.id);
       }
       window.location.replace("/");
     } catch (error) {

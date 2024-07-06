@@ -26,13 +26,13 @@ const UserHeader = () => {
   //For localStorage
   let accessToken : any;
   if ( typeof window !== 'undefined' || window !== null) {
-    accessToken = window.localStorage.getItem("access-token");
+    accessToken = localStorage.getItem("access-token");
   }
   const router = useRouter();
   const handleLogout = () => {
     if( typeof window !== 'undefined' || window !== null) {
-      window.localStorage.removeItem("access-token");
-      window.localStorage.removeItem("user-id");
+      localStorage.removeItem("access-token");
+      localStorage.removeItem("user-id");
     }
     const deleteAllCookies = () => {
       const cookies = document.cookie.split("; ");
