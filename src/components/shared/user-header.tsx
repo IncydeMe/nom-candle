@@ -43,7 +43,7 @@ const UserHeader = () => {
   };
   return (
     <>
-      <header className="flex w-screen h-fit justify-between px-10 items-center relative before:absolute before:left-[90px] before:bottom-0 before:h-[1px] before:w-[90%] before:border-[0.05rem] before:border-[#C6613D]">
+      <header className="bg-[#FFEDD7] flex w-screen h-fit justify-between px-10 items-center relative before:absolute before:left-[90px] before:bottom-0 before:h-[1px] before:w-[90%] before:border-[0.05rem] before:border-[#C6613D]">
         {/* Logo */}
         <section>
           <Link href={"/"}>
