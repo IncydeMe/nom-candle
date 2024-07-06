@@ -5,14 +5,14 @@ import UserBreadcrumb from "@/components/shared/breadcrumb";
 
 import Image from "next/image";
 
-import ProductImage from "../../../../../public/images/Product_Image.png";
+import ProductImage from "../../../../../../public/images/Product_Image.png";
 import { ProductCard } from "@/components/shared/custom-card";
 import {
   getAllProduct,
   getProductById,
   getRandomProducts,
 } from "@/utils/product";
-import { CartContext } from "@/app/user/cart/cartContext";
+import { CartContext } from "@/app/(user)/user/cart/cartContext";
 
 interface Product {
   productId: string;
@@ -150,6 +150,8 @@ export default function Page({
               type="best-seller"
               title={product.productName}
               image={product.productImgUrl}
+              productCategory={product.categoryName}
+              productId={product.productId}
             />
           ))}
         </div>

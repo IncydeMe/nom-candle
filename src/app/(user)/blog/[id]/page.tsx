@@ -2,7 +2,7 @@ import React from 'react'
 
 import UserBreadcrumb from '@/components/shared/breadcrumb'
 
-import Blog_1 from '../../../../public/images/Blog_Image_1.png';
+import Blog_1 from '../../../../../public/images/Blog_Image_1.png';
 import Image from 'next/image';
 
 const BlogDetailPage = () => {
