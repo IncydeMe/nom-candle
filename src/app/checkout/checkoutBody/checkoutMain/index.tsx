@@ -35,6 +35,12 @@ const CheckoutMain = () => {
     useState<UserInformation | null>(null);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  //For localStorage
+  if ( typeof localStorage === 'undefined' || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+
   const accountId = localStorage.getItem("user-id");
   const userAddress = userInformation?.address;
   const province = userAddress?.split(",")[3].trim();

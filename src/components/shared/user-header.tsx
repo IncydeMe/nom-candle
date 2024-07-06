@@ -23,6 +23,12 @@ import { useCart } from "@/app/(user)/user/cart/cartContext";
 const UserHeader = () => {
   const { cartItems } = useCart();
 
+  //For localStorage
+  if ( typeof localStorage === 'undefined' || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+
   const accessToken = localStorage.getItem("access-token");
   const router = useRouter();
   const handleLogout = () => {

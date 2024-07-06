@@ -8,6 +8,12 @@ import { useToast } from "@/components/ui/use-toast";
 import { getAccountById, updateAccount } from "@/utils/account";
 
 const EditProfileBody = () => {
+  //For localStorage
+  if ( typeof localStorage === 'undefined' || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+
   const accountId = localStorage.getItem("user-id");
 
   const { toast } = useToast();

@@ -20,6 +20,12 @@ const LoginBody = () => {
   });
   const { toast } = useToast();
 
+  //For localStorage
+  if ( typeof localStorage === 'undefined' || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+
   const handleChange = (e: any) => {
     setFormData({
       ...formData,
