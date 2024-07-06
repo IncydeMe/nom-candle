@@ -38,8 +38,10 @@ const OrderBody = () => {
     getAllOrder();
   }, []);
   const handleViewDetail = (orderId: string) => {
-    localStorage.setItem("order-id", orderId);
-    route.push(`/staff/order/order-details`);
+    if(typeof window !== "undefined") {
+      localStorage.setItem("order-id", orderId);
+      route.push(`/staff/order/order-details`);
+    }
   };
   return (
     <>

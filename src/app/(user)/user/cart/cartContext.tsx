@@ -29,12 +29,7 @@ export const CartContext = createContext<CartContextType>({
 });
 
 export const CartProvider: React.FC<Props> = ({ children }) => {
-  //For localStorage
-  if ( typeof localStorage === 'undefined' || localStorage === null) {
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
-  }
-
+  
   const [cartItems, setCartItems] = useState<ProductItem[]>(() => {
     if (typeof window !== "undefined") {
       const savedCartItems = localStorage.getItem("cartItems");

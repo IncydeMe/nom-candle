@@ -11,12 +11,11 @@ interface Account {
 }
 const CheckoutHeader = () => {
   //For localStorage
-  if ( typeof localStorage === 'undefined' || localStorage === null) {
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
+  let accountId: any;
+  if (typeof window !== "undefined") {
+    accountId = window.localStorage.getItem("user-id");
   }
   
-  const accountId = localStorage.getItem("user-id");
   const [account, setAccount] = useState<Account | null>(null);
 
   useEffect(() => {

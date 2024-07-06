@@ -20,11 +20,7 @@ const LoginBody = () => {
   });
   const { toast } = useToast();
 
-  //For localStorage
-  if ( typeof localStorage === 'undefined' || localStorage === null) {
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
-  }
+  
 
   const handleChange = (e: any) => {
     setFormData({
@@ -44,8 +40,11 @@ const LoginBody = () => {
         description: "Đăng nhập thành công",
         duration: 3000,
       });
-      localStorage.setItem("access-token", response.accessToken);
-      localStorage.setItem("user-id", response.id);
+      //For localStorage
+      if( typeof window !== 'undefined' || window !== null) {
+        window.localStorage.setItem("access-token", response.accessToken);
+        window.localStorage.setItem("user-id", response.id);
+      }
       window.location.replace("/");
     } catch (error) {
       toast({
