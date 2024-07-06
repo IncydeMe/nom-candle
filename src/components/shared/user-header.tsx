@@ -24,17 +24,16 @@ const UserHeader = () => {
   const { cartItems } = useCart();
 
   //For localStorage
-  if ( typeof localStorage === 'undefined' || localStorage === null) {
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
+  let accessToken : any;
+  if ( typeof window !== 'undefined' || window !== null) {
+    accessToken = window.localStorage.getItem("access-token");
   }
-
-  const accessToken = localStorage.getItem("access-token");
   const router = useRouter();
   const handleLogout = () => {
-    localStorage.removeItem("access-token");
-    localStorage.removeItem("user-id");
-
+    if( typeof window !== 'undefined' || window !== null) {
+      window.localStorage.removeItem("access-token");
+      window.localStorage.removeItem("user-id");
+    }
     const deleteAllCookies = () => {
       const cookies = document.cookie.split("; ");
       for (const cookie of cookies) {
