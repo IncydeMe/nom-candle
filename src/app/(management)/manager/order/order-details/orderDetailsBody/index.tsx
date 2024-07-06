@@ -12,7 +12,11 @@ interface OrderProps {
 }
 const OrderDetailsBody = () => {
   const [orderDetail, setOrderDetail] = React.useState<OrderProps>();
-  const orderId = localStorage.getItem("order-id");
+  const [orderId, setOrderId] = React.useState<any>(null);
+  useEffect(() => {
+    const orderId = localStorage.getItem("order-id");
+    setOrderId(orderId);
+  }, []);
   useEffect(() => {
     const getOrder = async () => {
       try {

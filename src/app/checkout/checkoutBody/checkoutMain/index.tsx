@@ -36,10 +36,12 @@ const CheckoutMain = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   //For localStorage
-  let accountId: any;
+  const [accountId, setAccountId] = useState<any>(null);
+  useEffect(() => {
   if (typeof window !== "undefined") {
-    accountId = localStorage.getItem("user-id");
+    setAccountId(localStorage.getItem("user-id"));
   }
+  }, []);
 
   const userAddress = userInformation?.address;
   const province = userAddress?.split(",")[3].trim();

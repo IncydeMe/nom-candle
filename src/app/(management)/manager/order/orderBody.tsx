@@ -38,10 +38,10 @@ const OrderBody = () => {
     getAllOrder();
   }, []);
   const handleViewDetail = (orderId: string) => {
-    if(typeof window !== "undefined") {
+    useEffect(() => {
       localStorage.setItem("order-id", orderId);
       route.push(`/staff/order/order-details`);
-    }
+    }, []);
   };
   return (
     <>

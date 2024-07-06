@@ -31,10 +31,13 @@ export const CartContext = createContext<CartContextType>({
 export const CartProvider: React.FC<Props> = ({ children }) => {
   
   const [cartItems, setCartItems] = useState<ProductItem[]>(() => {
-    if (typeof window !== "undefined") {
-      const savedCartItems = localStorage.getItem("cartItems");
-      return savedCartItems ? JSON.parse(savedCartItems) : [];
-    }
+    useEffect(() => {
+      const cartItems = localStorage.getItem("cartItems");
+      if (cartItems) {
+        return JSON.parse(cartItems);
+      }
+      return [];
+    }, []);
     return [];
   });
 
