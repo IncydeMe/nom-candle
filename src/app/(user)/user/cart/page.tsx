@@ -11,10 +11,11 @@ import { REFUND_POLICY } from "@/constants/policy.data";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useCart } from "./cartContext";
+import { Product } from "@/types/Product"; // Import the correct 'Product' type
 
 function Cart() {
   const { cartItems } = useCart();
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0); // Specify the type of 'totalPrice'
 
   useEffect(() => {
     updateTotalPrice();
@@ -49,7 +50,9 @@ function Cart() {
       </section>
 
       <section>
-        <TotalProductTable data={cartItems} setTotalPrice={setTotalPrice} />
+        <TotalProductTable 
+          data={cartItems} 
+           />
       </section>
 
       <section className="flex items-center justify-between bg-[#EBCBA5] mt-7">

@@ -75,9 +75,10 @@ export default function Page({
       addToCart({
         productId: product.productId,
         productName: product.productName,
-        productImgUrl: product?.productImgUrl,
         price: product.price,
         quantity: 1,
+        productImgUrl: product.productImgUrl,
+        totalPrice: product.price,
       });
     }
   };

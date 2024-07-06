@@ -6,19 +6,13 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { ProductItem } from "./totalProductTable";
 
-interface Product {
-  productId: string;
-  productName: string;
-  productImgUrl: string;
-  price: number;
-  quantity: number;
-  totalPrice?: number;
-}
+
 
 interface CartContextType {
-  cartItems: Product[];
-  addToCart: (product: Product) => void;
+  cartItems: ProductItem[];
+  addToCart: (product: ProductItem) => void;
   removeFromCart: (productId: string) => void;
   updateCartQuantity: (productId: string, quantity: number) => void;
 }
@@ -35,7 +29,7 @@ export const CartContext = createContext<CartContextType>({
 });
 
 export const CartProvider: React.FC<Props> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<Product[]>(() => {
+  const [cartItems, setCartItems] = useState<ProductItem[]>(() => {
     if (typeof window !== "undefined") {
       const savedCartItems = localStorage.getItem("cartItems");
       return savedCartItems ? JSON.parse(savedCartItems) : [];
@@ -47,7 +41,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: ProductItem) => {
     setCartItems((prevItems) => {
       const existingProductIndex = prevItems.findIndex(
         (item) => item.productId === product.productId
