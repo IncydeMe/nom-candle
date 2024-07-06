@@ -2,15 +2,15 @@
 
 import { ChevronRight, MoveRight } from "lucide-react";
 import Image from "next/image";
-import cart_hero from "../../../../public/images/cart/cart_hero.png";
+import cart_hero from "../../../../../public/images/cart/cart_hero.png";
 import UserBreadcrumb from "@/components/shared/breadcrumb";
 
 import TotalProductTable from "./totalProductTable";
 import { Button } from "@/components/ui/button";
 import { REFUND_POLICY } from "@/constants/policy.data";
-import { useCart } from "./cartContext";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useCart } from "./cartContext";
 
 function Cart() {
   const { cartItems } = useCart();

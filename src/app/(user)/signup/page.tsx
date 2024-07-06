@@ -1,5 +1,5 @@
+import SignupBody from "@/app/signup/signupBody";
 import React from "react";
-import SignupBody from "./signupBody";
 
 const SignupPage = () => {
   return (
