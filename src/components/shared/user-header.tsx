@@ -17,8 +17,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/app/user/cart/cartContext";
 import { Badge } from "../ui/badge";
+import { useCart } from "@/app/(user)/user/cart/cartContext";
 
 const UserHeader = () => {
   const { cartItems } = useCart();

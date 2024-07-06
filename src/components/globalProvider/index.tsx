@@ -1,4 +1,4 @@
-import { CartProvider } from "@/app/user/cart/cartContext";
+import { CartProvider } from "@/app/(user)/user/cart/cartContext";
 import React from "react";
 
 const GlobalProvider = ({ children }: { children: any }) => {

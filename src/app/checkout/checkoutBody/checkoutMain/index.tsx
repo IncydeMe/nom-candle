@@ -9,13 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useCart } from "@/app/user/cart/cartContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import PaymentMethod from "./paymentMethod";
 import { createOrder } from "@/utils/order";
 import { getAccountById } from "@/utils/account";
 import { useToast } from "@/components/ui/use-toast";
+import { useCart } from "@/app/(user)/user/cart/cartContext";
 
 interface UserInformation {
   accountId: string;
