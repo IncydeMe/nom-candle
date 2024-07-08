@@ -34,7 +34,7 @@ const UserHeader = () => {
   const router = useRouter();
   const handleLogout = () => {
     useEffect(() => {
-      if( typeof window !== 'undefined' || window !== null) {
+      if (typeof window !== "undefined" || window !== null) {
         localStorage.removeItem("access-token");
         localStorage.removeItem("user-id");
       }
@@ -48,8 +48,8 @@ const UserHeader = () => {
       };
       deleteAllCookies();
       router.push("/login");
-  } , []);
-  }
+    }, []);
+  };
   return (
     <>
       <header className="bg-[#FFEDD7] flex w-screen h-fit justify-between px-10 items-center relative before:absolute before:left-[90px] before:bottom-0 before:h-[1px] before:w-[90%] before:border-[0.05rem] before:border-[#C6613D]">
@@ -57,6 +57,7 @@ const UserHeader = () => {
         <section>
           <Link href={"/"}>
             <Image
+              priority
               src={Logo}
               alt="Logo"
               className="cursor-pointer h-[120px] w-[120px] object-contain"

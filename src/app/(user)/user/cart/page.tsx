@@ -29,7 +29,7 @@ function Cart() {
   };
   return (
     <main className="text-[#C6613D]">
-      <Image src={cart_hero} alt="cartHero" />
+      <Image priority src={cart_hero} alt="cartHero" />
       <div className=" mt-4">
         <UserBreadcrumb />
       </div>
@@ -50,9 +50,7 @@ function Cart() {
       </section>
 
       <section>
-        <TotalProductTable 
-          data={cartItems} 
-           />
+        <TotalProductTable data={cartItems} />
       </section>
 
       <section className="flex items-center justify-between bg-[#EBCBA5] mt-7">

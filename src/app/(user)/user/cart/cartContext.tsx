@@ -8,8 +8,6 @@ import React, {
 } from "react";
 import { ProductItem } from "./totalProductTable";
 
-
-
 interface CartContextType {
   cartItems: ProductItem[];
   addToCart: (product: ProductItem) => void;
@@ -29,16 +27,9 @@ export const CartContext = createContext<CartContextType>({
 });
 
 export const CartProvider: React.FC<Props> = ({ children }) => {
-  
   const [cartItems, setCartItems] = useState<ProductItem[]>(() => {
-    useEffect(() => {
-      const cartItems = localStorage.getItem("cartItems");
-      if (cartItems) {
-        return JSON.parse(cartItems);
-      }
-      return [];
-    }, []);
-    return [];
+    const cartItems = localStorage.getItem("cartItems");
+    return cartItems ? JSON.parse(cartItems) : [];
   });
 
   useEffect(() => {

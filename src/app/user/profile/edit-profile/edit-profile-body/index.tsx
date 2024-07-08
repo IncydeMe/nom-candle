@@ -29,14 +29,14 @@ const EditProfileBody = () => {
   useEffect(() => {
     getAccountById(accountId || "").then((account) => {
       if (account) {
-        setFirstName(account.firstName);
-        setLastName(account.lastName);
-        setEmail(account.email);
-        setPhone(account.phone);
-        setAddress(account.address);
+        setFirstName(account.firstName || "");
+        setLastName(account.lastName || "");
+        setEmail(account.email || "");
+        setPhone(account.phone || "");
+        setAddress(account.address || "");
       }
     });
-  }, []);
+  }, [accountId]);
 
   const handleUpdateAccount = async () => {
     const accountData = {

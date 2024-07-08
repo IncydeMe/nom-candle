@@ -109,7 +109,6 @@ export default function Page({
             src={ProductImage}
             width={500}
             height={500}
-            objectFit="cover"
             alt="Product Image"
             className="w-full h-[360px] object-cover rounded-[8px]"
           />

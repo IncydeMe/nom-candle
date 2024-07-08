@@ -33,7 +33,7 @@ const UserBreadcrumb = () => {
         {pathname.map((path, index) => {
           while (path !== "") {
             return (
-              <div key={index}>
+              <div className="flex items-center" key={index}>
                 <BreadcrumbItem key={index}>
                   <BreadcrumbLink
                     href={`/${path}`}

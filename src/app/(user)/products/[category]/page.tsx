@@ -203,17 +203,13 @@ const ProductPage = ({
             .filter((product) => product.categoryName === type)
             .map(({ productId, productName, productImgUrl, categoryName }) => {
               return (
-                <Link
-                  href={`/products/${params.category}/${productId}`}
+                <ProductCard
                   key={productId}
-                >
-                  <ProductCard 
-                    image={productImgUrl} 
-                    title={productName} 
-                    productId={productId}
-                    productCategory={categoryName}
-                  />
-                </Link>
+                  image={productImgUrl}
+                  title={productName}
+                  productId={productId}
+                  productCategory={categoryName}
+                />
               );
             })}
         </section>
