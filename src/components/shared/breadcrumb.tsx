@@ -33,7 +33,7 @@ const UserBreadcrumb = () => {
         {pathname.map((path, index) => {
           while (path !== "") {
             return (
-              <>
+              <div key={index}>
                 <BreadcrumbItem key={index}>
                   <BreadcrumbLink
                     href={`/${path}`}
@@ -47,7 +47,7 @@ const UserBreadcrumb = () => {
                     <ChevronRight />
                   </BreadcrumbSeparator>
                 )}
-              </>
+              </div>
             );
           }
           return null;
