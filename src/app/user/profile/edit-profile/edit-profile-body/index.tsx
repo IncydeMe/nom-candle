@@ -8,7 +8,14 @@ import { useToast } from "@/components/ui/use-toast";
 import { getAccountById, updateAccount } from "@/utils/account";
 
 const EditProfileBody = () => {
-  const accountId = localStorage.getItem("user-id");
+  const [accountId, setAccountId] = useState<any>(null);
+  //For localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const value = localStorage.getItem("user-id");
+      setAccountId(value);
+    }
+  }, []);
 
   const { toast } = useToast();
 

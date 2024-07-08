@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { CircleUserRound } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
@@ -23,24 +23,33 @@ import { useCart } from "@/app/(user)/user/cart/cartContext";
 const UserHeader = () => {
   const { cartItems } = useCart();
 
-  const accessToken = localStorage.getItem("access-token");
+  //For localStorage
+  const [accessToken, setAccessToken] = useState<string | null>("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const value = localStorage.getItem("access-token");
+      setAccessToken(value);
+    }
+  }, []);
   const router = useRouter();
   const handleLogout = () => {
-    localStorage.removeItem("access-token");
-    localStorage.removeItem("user-id");
-
-    const deleteAllCookies = () => {
-      const cookies = document.cookie.split("; ");
-      for (const cookie of cookies) {
-        const eqPos = cookie.indexOf("=");
-        const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+    useEffect(() => {
+      if( typeof window !== 'undefined' || window !== null) {
+        localStorage.removeItem("access-token");
+        localStorage.removeItem("user-id");
       }
-    };
-
-    deleteAllCookies();
-    router.push("/login");
-  };
+      const deleteAllCookies = () => {
+        const cookies = document.cookie.split("; ");
+        for (const cookie of cookies) {
+          const eqPos = cookie.indexOf("=");
+          const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+          document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        }
+      };
+      deleteAllCookies();
+      router.push("/login");
+  } , []);
+  }
   return (
     <>
       <header className="bg-[#FFEDD7] flex w-screen h-fit justify-between px-10 items-center relative before:absolute before:left-[90px] before:bottom-0 before:h-[1px] before:w-[90%] before:border-[0.05rem] before:border-[#C6613D]">

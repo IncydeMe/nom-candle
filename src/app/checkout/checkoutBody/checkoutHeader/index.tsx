@@ -10,7 +10,16 @@ interface Account {
   phone: string;
 }
 const CheckoutHeader = () => {
-  const accountId = localStorage.getItem("user-id");
+  //For localStorage
+  const [accountId, setAccountId] = useState<any>(null);
+  //For localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const value = localStorage.getItem("user-id");
+      setAccountId(value);
+    }
+  }, []);
+
   const [account, setAccount] = useState<Account | null>(null);
 
   useEffect(() => {

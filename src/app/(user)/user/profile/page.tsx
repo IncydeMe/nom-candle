@@ -6,10 +6,13 @@ import { useRouter } from "next/navigation";
 
 function UserProfile() {
   const router = useRouter();
+  
   useEffect(() => {
-    const accessToken = localStorage.getItem("access-token");
-    if (!accessToken) {
-      router.push("/login");
+    if( typeof window !== 'undefined' || window !== null) {
+      const accessToken = localStorage.getItem("access-token");
+      if (!accessToken) {
+        router.push("/login");
+      }
     }
   });
   return (

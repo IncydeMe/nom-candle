@@ -35,7 +35,14 @@ const CheckoutMain = () => {
     useState<UserInformation | null>(null);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const accountId = localStorage.getItem("user-id");
+  //For localStorage
+  const [accountId, setAccountId] = useState<any>(null);
+  useEffect(() => {
+  if (typeof window !== "undefined") {
+    setAccountId(localStorage.getItem("user-id"));
+  }
+  }, []);
+
   const userAddress = userInformation?.address;
   const province = userAddress?.split(",")[3].trim();
   const district = userAddress?.split(",")[2].trim();

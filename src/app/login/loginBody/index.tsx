@@ -20,6 +20,8 @@ const LoginBody = () => {
   });
   const { toast } = useToast();
 
+  
+
   const handleChange = (e: any) => {
     setFormData({
       ...formData,
@@ -38,8 +40,11 @@ const LoginBody = () => {
         description: "Đăng nhập thành công",
         duration: 3000,
       });
-      localStorage.setItem("access-token", response.accessToken);
-      localStorage.setItem("user-id", response.id);
+      //For localStorage
+      if( typeof window !== 'undefined' || window !== null) {
+        localStorage.setItem("access-token", response.accessToken);
+        localStorage.setItem("user-id", response.id);
+      }
       window.location.replace("/");
     } catch (error) {
       toast({

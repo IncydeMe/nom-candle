@@ -12,7 +12,7 @@ import {
 import { SquareMinus, SquarePlus } from "lucide-react"; // Add import
 import { useCart } from "../cartContext";
 
-interface Product {
+export interface ProductItem {
   productId: string;
   productName: string;
   productImgUrl: string;
@@ -20,14 +20,17 @@ interface Product {
   quantity: number;
   totalPrice: number;
 }
+
 interface TotalProductTableProps {
-  data: Product[];
+  data: ProductItem[];
+  
 }
 
 const TotalProductTable: React.FC<TotalProductTableProps> = ({
   data,
+  
 }: {
-  data: Product[];
+  data: ProductItem[];
 }) => {
   const { updateCartQuantity } = useCart();
 
