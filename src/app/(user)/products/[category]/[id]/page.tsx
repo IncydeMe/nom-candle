@@ -5,7 +5,6 @@ import UserBreadcrumb from "@/components/shared/breadcrumb";
 
 import Image from "next/image";
 
-import ProductImage from "../../../../../../public/images/Product_Image.png";
 import { ProductCard } from "@/components/shared/custom-card";
 import {
   getAllProduct,
@@ -105,13 +104,15 @@ export default function Page({
       </section>
       <section className="grid grid-cols-3 gap-4 mt-4">
         <div className="col-span-2">
-          <Image
-            src={ProductImage}
-            width={500}
-            height={500}
-            alt="Product Image"
-            className="w-full h-[360px] object-cover rounded-[8px]"
-          />
+          {product?.productImgUrl && (
+            <Image
+              src={product.productImgUrl}
+              width={500}
+              height={500}
+              alt="Product Image"
+              className="w-full h-[360px] object-cover rounded-[8px]"
+            />
+          )}
         </div>
         <div className="">
           <div className="flex flex-col gap-4">
