@@ -38,9 +38,9 @@ const CheckoutMain = () => {
   //For localStorage
   const [accountId, setAccountId] = useState<any>(null);
   useEffect(() => {
-  if (typeof window !== "undefined") {
-    setAccountId(localStorage.getItem("user-id"));
-  }
+    if (typeof window !== "undefined" || typeof localStorage !== undefined) {
+      setAccountId(localStorage.getItem("user-id"));
+    }
   }, []);
 
   const userAddress = userInformation?.address;

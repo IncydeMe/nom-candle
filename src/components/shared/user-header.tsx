@@ -26,7 +26,7 @@ const UserHeader = () => {
   //For localStorage
   const [accessToken, setAccessToken] = useState<string | null>("");
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" || typeof localStorage !== "undefined") {
       const value = localStorage.getItem("access-token");
       setAccessToken(value);
     }
@@ -34,7 +34,11 @@ const UserHeader = () => {
   const router = useRouter();
   const handleLogout = () => {
     useEffect(() => {
-      if (typeof window !== "undefined" || window !== null) {
+      if (
+        typeof window !== "undefined" ||
+        window !== null ||
+        typeof localStorage !== undefined
+      ) {
         localStorage.removeItem("access-token");
         localStorage.removeItem("user-id");
       }

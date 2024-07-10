@@ -20,8 +20,6 @@ const LoginBody = () => {
   });
   const { toast } = useToast();
 
-  
-
   const handleChange = (e: any) => {
     setFormData({
       ...formData,
@@ -41,7 +39,11 @@ const LoginBody = () => {
         duration: 3000,
       });
       //For localStorage
-      if( typeof window !== 'undefined' || window !== null) {
+      if (
+        typeof window !== "undefined" ||
+        window !== null ||
+        typeof localStorage !== "undefined"
+      ) {
         localStorage.setItem("access-token", response.accessToken);
         localStorage.setItem("user-id", response.id);
       }

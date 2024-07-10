@@ -6,9 +6,13 @@ import { useRouter } from "next/navigation";
 
 function UserProfile() {
   const router = useRouter();
-  
+
   useEffect(() => {
-    if( typeof window !== 'undefined' || window !== null) {
+    if (
+      typeof window !== "undefined" ||
+      window !== null ||
+      typeof localStorage !== undefined
+    ) {
       const accessToken = localStorage.getItem("access-token");
       if (!accessToken) {
         router.push("/login");

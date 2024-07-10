@@ -13,8 +13,6 @@ import Blog_3 from "../../public/images/Blog_Image_3.png";
 
 import Logo from "../../public/images/sample_logo.png";
 import Link from "next/link";
-import UserHeader from "@/components/shared/user-header";
-import UserFooter from "@/components/shared/user-footer";
 
 export default function Home() {
   return (
@@ -29,6 +27,7 @@ export default function Home() {
             nhận được một bầu không khí nhẹ nhàng và thư giãn.
           </span>
           <Image
+            priority
             src={HeroImage}
             alt="Hero Image"
             className="w-[560px] h-[360px] object-cover rounded-[12px]"

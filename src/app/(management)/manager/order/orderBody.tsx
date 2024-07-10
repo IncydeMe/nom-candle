@@ -39,7 +39,9 @@ const OrderBody = () => {
   }, []);
   const handleViewDetail = (orderId: string) => {
     useEffect(() => {
-      localStorage.setItem("order-id", orderId);
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("order-id", orderId);
+      }
       route.push(`/staff/order/order-details`);
     }, []);
   };
