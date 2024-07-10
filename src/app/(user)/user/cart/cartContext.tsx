@@ -28,13 +28,14 @@ export const CartContext = createContext<CartContextType>({
 
 export const CartProvider: React.FC<Props> = ({ children }) => {
   const [cartItems, setCartItems] = useState<ProductItem[]>(() => {
-    if (typeof localStorage === "undefined") return [];
+    if (typeof window === "undefined" || typeof localStorage === "undefined")
+      return [];
     const cartItems = localStorage.getItem("cartItems");
     return cartItems ? JSON.parse(cartItems) : [];
   });
 
   useEffect(() => {
-    if (typeof localStorage !== "undefined") {
+    if (typeof window !== "undefined" || typeof localStorage !== "undefined") {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
   }, [cartItems]);

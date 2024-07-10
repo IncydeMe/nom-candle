@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input";
@@ -39,14 +39,16 @@ const LoginBody = () => {
         duration: 3000,
       });
       //For localStorage
-      if (
-        typeof window !== "undefined" ||
-        window !== null ||
-        typeof localStorage !== "undefined"
-      ) {
-        localStorage.setItem("access-token", response.accessToken);
-        localStorage.setItem("user-id", response.id);
-      }
+      useEffect(() => {
+        if (
+          typeof window !== "undefined" ||
+          window !== null ||
+          typeof localStorage !== "undefined"
+        ) {
+          localStorage.setItem("access-token", response.accessToken);
+          localStorage.setItem("user-id", response.id);
+        }
+      }, [response.accessToken, response.id]);
       window.location.replace("/");
     } catch (error) {
       toast({

@@ -33,14 +33,17 @@ const UserHeader = () => {
   }, []);
   const router = useRouter();
   const handleLogout = () => {
-    if (
-      typeof window !== "undefined" ||
-      window !== null ||
-      typeof localStorage !== undefined
-    ) {
-      localStorage.removeItem("access-token");
-      localStorage.removeItem("user-id");
-    }
+    useEffect(() => {
+      if (
+        typeof window !== "undefined" ||
+        window !== null ||
+        typeof localStorage !== undefined
+      ) {
+        localStorage.removeItem("access-token");
+        localStorage.removeItem("user-id");
+      }
+    });
+
     const deleteAllCookies = () => {
       const cookies = document.cookie.split("; ");
       for (const cookie of cookies) {

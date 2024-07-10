@@ -14,10 +14,10 @@ const OrderDetailsBody = () => {
   const [orderDetail, setOrderDetail] = React.useState<OrderProps>();
   const [orderId, setOrderId] = React.useState<any>(null);
   useEffect(() => {
-    if (typeof localStorage !== "undefined") {
+    if (typeof window !== "undefined" || typeof localStorage !== "undefined") {
       const orderId = localStorage.getItem("order-id");
+      setOrderId(orderId);
     }
-    setOrderId(orderId);
   }, []);
   useEffect(() => {
     const getOrder = async () => {
