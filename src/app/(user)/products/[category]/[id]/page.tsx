@@ -4,6 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import UserBreadcrumb from "@/components/shared/breadcrumb";
 
 import Image from "next/image";
+import Product_Image from "../../../../../../public/images/Product_Image.png";
 
 import { ProductCard } from "@/components/shared/custom-card";
 import {
@@ -106,7 +107,9 @@ export default function Page({
         <div className="col-span-2">
           {product?.productImgUrl && (
             <Image
-              src={product.productImgUrl}
+              src={
+                product.productImgUrl ? product.productImgUrl : Product_Image
+              }
               width={500}
               height={500}
               alt="Product Image"
@@ -121,7 +124,6 @@ export default function Page({
             </h4>
             <em className="text-[#C6613D]">
               {product?.description} <br />
-              Mùi hương: Lê Nghĩa. <br />
             </em>
             <p className="text-[16px] font-semibold text-[#C6613D]">
               {productPrice}{" "}
