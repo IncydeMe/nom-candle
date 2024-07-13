@@ -18,6 +18,11 @@ const LoginBody = () => {
     email: "",
     password: "",
   });
+  const [loginResponse, setLoginResponse] = useState({
+    accessToken: "",
+    id: "",
+  });
+
   const { toast } = useToast();
 
   const handleChange = (e: any) => {
@@ -38,17 +43,7 @@ const LoginBody = () => {
         description: "Đăng nhập thành công",
         duration: 3000,
       });
-      //For localStorage
-      useEffect(() => {
-        if (
-          typeof window !== "undefined" ||
-          window !== null ||
-          typeof localStorage !== "undefined"
-        ) {
-          localStorage.setItem("access-token", response.accessToken);
-          localStorage.setItem("user-id", response.id);
-        }
-      }, [response.accessToken, response.id]);
+      setLoginResponse(response);
       window.location.replace("/");
     } catch (error) {
       toast({
@@ -57,6 +52,20 @@ const LoginBody = () => {
       });
     }
   };
+
+  //For localStorage
+  useEffect(() => {
+    if (loginResponse !== null) {
+      if (
+        typeof window !== "undefined" ||
+        window !== null ||
+        typeof localStorage !== "undefined"
+      ) {
+        localStorage.setItem("access-token", loginResponse.accessToken);
+        localStorage.setItem("user-id", loginResponse.id);
+      }
+    }
+  }, [loginResponse]);
 
   return (
     <section className="text-[#C6613D]">
