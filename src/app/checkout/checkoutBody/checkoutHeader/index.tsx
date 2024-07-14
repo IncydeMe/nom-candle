@@ -11,7 +11,17 @@ interface Account {
 }
 const CheckoutHeader = () => {
   //For localStorage
+  const [account, setAccount] = useState<Account | null>(null);
   const [accountId, setAccountId] = useState<any>(null);
+
+  const userAddress =
+    account?.address === undefined ? "Không có địa chỉ" : account?.address;
+  const userName =
+    account?.lastName === undefined || account?.firstName === undefined
+      ? "Không có tên người nhận"
+      : account?.lastName + " " + account?.firstName;
+  const userPhone =
+    account?.phone === undefined ? "Không có số điện thoại" : account?.phone;
   //For localStorage
   useEffect(() => {
     if (typeof window !== "undefined" || typeof localStorage !== undefined) {
@@ -19,8 +29,6 @@ const CheckoutHeader = () => {
       setAccountId(value);
     }
   }, []);
-
-  const [account, setAccount] = useState<Account | null>(null);
 
   useEffect(() => {
     getAccountById(accountId || "").then((account) => {
@@ -37,9 +45,9 @@ const CheckoutHeader = () => {
       </div>
       <div className="flex justify-between mt-3">
         <div>
-          {account?.lastName + " " + account?.firstName} {`(${account?.phone})`}
+          {userName} {`(${userPhone})`}
         </div>
-        <div>{account?.address}</div>
+        <div>{userAddress}</div>
       </div>
     </div>
   );

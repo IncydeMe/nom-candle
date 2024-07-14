@@ -70,6 +70,17 @@ const CheckoutMain = () => {
         description: "Vui lòng chọn phương thức thanh toán",
         duration: 3000,
       });
+    } else if (
+      !userInformation?.address ||
+      !userInformation?.phone ||
+      !userInformation?.firstName ||
+      !userInformation?.lastName
+    ) {
+      toast({
+        description:
+          "Vui lòng nhập thông tin địa chỉ, số điện thoại, tên người nhận",
+        duration: 3000,
+      });
     } else {
       try {
         const userInfomation = {
@@ -120,7 +131,7 @@ const CheckoutMain = () => {
                   {item.productName}
                 </TableCell>
                 <TableCell className="font-medium text-center">
-                  {item.price}
+                  {item.price.toLocaleString()}
                 </TableCell>
                 <TableCell className="font-medium text-center">
                   {item.quantity}
