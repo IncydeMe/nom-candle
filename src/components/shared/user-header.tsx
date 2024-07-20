@@ -33,27 +33,25 @@ const UserHeader = () => {
   }, []);
   const router = useRouter();
   const handleLogout = () => {
-    useEffect(() => {
-      if (
-        typeof window !== "undefined" ||
-        window !== null ||
-        typeof localStorage !== undefined
-      ) {
-        localStorage.removeItem("access-token");
-        localStorage.removeItem("user-id");
-      }
-    });
+    if (
+      typeof window !== "undefined" &&
+      window !== null &&
+      typeof localStorage !== "undefined"
+    ) {
+      localStorage.removeItem("access-token");
+      localStorage.removeItem("user-id");
 
-    const deleteAllCookies = () => {
-      const cookies = document.cookie.split("; ");
-      for (const cookie of cookies) {
-        const eqPos = cookie.indexOf("=");
-        const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
-      }
-    };
-    deleteAllCookies();
-    router.push("/login");
+      const deleteAllCookies = () => {
+        const cookies = document.cookie.split("; ");
+        for (const cookie of cookies) {
+          const eqPos = cookie.indexOf("=");
+          const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+          document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        }
+      };
+      deleteAllCookies();
+      router.push("/login");
+    }
   };
   return (
     <>
