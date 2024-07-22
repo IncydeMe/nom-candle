@@ -28,7 +28,7 @@ const EditProfileBody = () => {
 
   useEffect(() => {
     getAccountById(accountId || "").then((account) => {
-      console.log(account);
+      // console.log(account);
       if (account) {
         setFirstName(account.firstName || "");
         setLastName(account.lastName || "");
